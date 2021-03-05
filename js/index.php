@@ -43,7 +43,7 @@
 
 		<div class="col-md-6">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Progr&Xi;ss <span class="pull-right"><?=number_format(($stat['unpaid']/$stat['payout'])*100)?>%</span></h4></li>
+				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Progress <span class="pull-right"><?=number_format(($stat['unpaid']/$stat['payout'])*100)?>%</span></h4></li>
 				<li class="list-group-item">Unpaid 	<span class="pull-right">&Xi;<?=number_format($stat['unpaid'],5)?></span></li>
 				<li class="list-group-item">Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?></span></li>
 				<li class="list-group-item">Time Left	<span class="pull-right"><?=core_calc_remaining($stat['hoursuntil'])?></span></li>
@@ -63,9 +63,11 @@
 
 		<div class="col-md-3">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Prices</h4></li>
-				<li class="list-group-item">&Xi;TH 	<span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2)?></span></li>
-				<li class="list-group-item">฿TC 	<span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2)?></span></li>
+				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Prices (24 hour change)</h4></li>
+				<?php if ( $cethchange >= '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: green"><?=$fiat['sym'].number_format($ethtofiat,2)?> (<?=$fiat['sym'].number_format($ethchange,2)?>)</span></li> <?php } ?>
+				<?php if ( $cethchange < '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: red"><?=$fiat['sym'].number_format($ethtofiat,2)?> (<?=$fiat['sym'].number_format($ethchange,2)?>)</span></li> <?php } ?>
+				<?php if ( $cethchange >= '0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: green"><?=$fiat['sym'].number_format($btctofiat,2)?> (<?=$fiat['sym'].number_format($btcchange,2)?>)</span></li> <?php } ?>
+				<?php if ( $cethchange <'0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: red"><?=$fiat['sym'].number_format($btctofiat,2)?> (<?=$fiat['sym'].number_format($btcchange,2)?>)</span></li> <?php } ?>
 			</ul>
 		</div>
 
