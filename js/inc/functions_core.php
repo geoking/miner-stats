@@ -2,24 +2,6 @@
 
 // Core functions file
 
-
-function core_output_head() {
-	echo '
-		<meta charset="utf-8">
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-	    <link href="/css/custom.css" rel="stylesheet">
-	    <!--[if lt IE 9]>
-	    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	    <![endif]-->
-	    <title>MIN&Xi; ['.rand('11111111','99999999').']</title>
-	    <meta http-equiv="Refresh" content="300">
-    ';
-}
-
 function core_output_footerscripts() {
 	echo '
 		<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
@@ -148,9 +130,9 @@ curl_close($ch);
 $bfi = json_decode($result, true);
 $btctofiat = $bfi['ticker']['price'];
 
-$stat['hashrate'] = number_format( round( $obj['data']['currentHashrate']/1000000, 2),1 );
-$stat['avghashrate'] = number_format( round( $obj['data']['averageHashrate']/1000000, 2),1 );
-$stat['reportedhashrate'] = number_format( round( $obj['data']['reportedHashrate'], 2),1 );
+$stat['hashrate'] = number_format( round( $obj['data']['currentHashrate']/1000000, 2),2 );
+$stat['avghashrate'] = number_format( round( $obj['data']['averageHashrate']/1000000, 2),2 );
+$stat['reportedhashrate'] = number_format( round( $obj['data']['reportedHashrate']/1000000, 2),2 );
 $stat['payout'] = 0.1;
 $stat['emin'] = $obj['data']['coinsPerMin'];
 $stat['ehour'] = $stat['emin']*60;
