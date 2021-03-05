@@ -64,10 +64,10 @@
 		<div class="col-md-3">
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Prices (24 hour change)</h4></li>
-				<?php if ( $cethchange >= '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: green"><?=$fiat['sym'].number_format($ethtofiat,2)?> (<?=$fiat['sym'].number_format($ethchange,2)?>)</span></li> <?php } ?>
-				<?php if ( $cethchange < '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: red"><?=$fiat['sym'].number_format($ethtofiat,2)?> (<?=$fiat['sym'].number_format($ethchange,2)?>)</span></li> <?php } ?>
-				<?php if ( $cethchange >= '0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: green"><?=$fiat['sym'].number_format($btctofiat,2)?> (<?=$fiat['sym'].number_format($btcchange,2)?>)</span></li> <?php } ?>
-				<?php if ( $cethchange <'0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: red"><?=$fiat['sym'].number_format($btctofiat,2)?> (<?=$fiat['sym'].number_format($btcchange,2)?>)</span></li> <?php } ?>
+				<?php if ( $cethchange >= '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: green">&nbsp;(<?=$fiat['sym'].number_format($ethchange,2)?>)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $cethchange < '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: red">&nbsp;(<?=$fiat['sym'].number_format($ethchange,2)?>)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $cethchange >= '0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: green">&nbsp;(<?=$fiat['sym'].number_format($btcchange,2)?>)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $cethchange <'0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: red">&nbsp;(<?=$fiat['sym'].number_format($btcchange,2)?>)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
 			</ul>
 		</div>
 
