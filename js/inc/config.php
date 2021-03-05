@@ -7,14 +7,14 @@
 // --- Encryption key for URLS ---
 // Used to mask links and other private data configured within miner stats
 // Set this to a random string of at least 20 characters
-	$conf['key'] = '86XzjlVmdY4TY8N0000';
+	$conf['key'] = '86XzjlVmdY4TY8NHLD5';
 
 
 // --- Wallet/Account Address ---
 // Used to pull stats from ethermine, as well as the etherium blockchain
 // This is the same as "<Your_Ethereum_Address>" when configuring your miner
 // on ethermine.org
-	$conf['wallet'] = '0x';
+	$conf['wallet'] = '0x1078A33e916c33D5DDe843BEC9C1168d92C1dE56';
 
 
 // --- Timezone ---
