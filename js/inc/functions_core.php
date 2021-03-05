@@ -118,6 +118,7 @@ $result = curl_exec($ch);
 curl_close($ch);
 $efi = json_decode($result, true);
 $ethtofiat = $efi['ticker']['price'];
+$ethchange = $efi['ticker']['change'];
 
 
 // gets crypto exchange rate for BTC using cryptonator.com/api
@@ -129,6 +130,7 @@ $result = curl_exec($ch);
 curl_close($ch);
 $bfi = json_decode($result, true);
 $btctofiat = $bfi['ticker']['price'];
+$btcchange = $bfi['ticker']['change'];
 
 $stat['hashrate'] = number_format( round( $obj['data']['currentHashrate']/1000000, 2),2 );
 $stat['avghashrate'] = number_format( round( $obj['data']['averageHashrate']/1000000, 2),2 );
