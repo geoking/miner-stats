@@ -141,6 +141,7 @@ $stat['ehour'] = $stat['emin']*60;
 $stat['eday'] = $stat['ehour']*24;
 $stat['eweek'] = $stat['eday']*7;
 $stat['emonth'] = ( $stat['eweek']*52 )/12;
+$stat['eyear'] = $stat['eweek']*52;
 
 if ( $stat['ehour'] != '0' ) { 
 
@@ -149,12 +150,14 @@ if ( $stat['ehour'] != '0' ) {
 	$stat['bday'] = $stat['bhour']*24;
 	$stat['bweek'] = $stat['bday']*7;
 	$stat['bmonth'] = ( $stat['bweek']*52 )/12;
+	$stat['byear'] = $stat['bweek']*52;
 
 	$stat['umin'] = ($obj['data']['usdPerMin']);
 	$stat['uhour'] = $stat['umin']*60;
 	$stat['uday'] = $stat['uhour']*24;
 	$stat['uweek'] = $stat['uday']*7;
 	$stat['umonth'] = ( $stat['uweek']*52 )/12;
+	$stat['uyear'] = $stat['uweek']*52;
 
 	$stat['unpaid'] = number_format((($obj['data']['unpaid']/10)/100000000000000000),5);
 
