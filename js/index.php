@@ -101,9 +101,9 @@
 		<div class="col-md-3">
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Prices (1hr +/-%)</h4></li>
-				<?php if ( $ethchange >= '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: green">&nbsp;(<?=number_format(((1 - ($ethtofiat + $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $ethchange >= '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: green">&nbsp;(<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
 				<?php if ( $ethchange < '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
-				<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: green">&nbsp;(<?=number_format(((1 - ($btctofiat + $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: green">&nbsp;(<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
 				<?php if ( $btcchange <'0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
 			</ul>
 		</div>
