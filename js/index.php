@@ -33,8 +33,8 @@
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Progress <span class="pull-right"><?=number_format(($stat['unpaid']/$stat['payout'])*100)?>%</span></h4></li>
 				<li class="list-group-item">Unpaid 	<span class="pull-right">&Xi;<?=number_format($stat['unpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['unpaid']),2)?>)</span></li>
-				<li class="list-group-item">Est &Xi; (yesterday)		<span class="pull-right">&Xi;<?=number_format(($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']),5)?> (<?=$fiat['sym'].number_format(($ethtofiat * ($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'])),2)?>)</span></li>
-				<li class="list-group-item">Est &Xi; (2 days ago)		<span class="pull-right">&Xi;<?=number_format(($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']),5)?> (<?=$fiat['sym'].number_format(($ethtofiat * ($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'])),2)?>)</span></li>
+				<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format(($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']),5)?> (<?=$fiat['sym'].number_format(($ethtofiat * ($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'])),2)?>)</span></li>
+				<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format(($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']),5)?> (<?=$fiat['sym'].number_format(($ethtofiat * ($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'])),2)?>)</span></li>
 				<li class="list-group-item">Payout Figure		<span class="pull-right">&Xi;0.1 (<?=$fiat['sym'].number_format(($ethtofiat / 10),2)?>)</span></li>
 				<li class="list-group-item">Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['eneeded']),2)?>)</span></li>
 			</ul>
