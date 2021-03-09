@@ -132,6 +132,13 @@ $bfi = json_decode($result, true);
 $btctofiat = $bfi['ticker']['price'];
 $btcchange = $bfi['ticker']['change'];
 
+$result = file_get_contents('currentStats.tmp');
+$currentStats = json_decode($result, true);
+$result = file_get_contents('currentStatsOld.tmp');
+$currentStatsOld = json_decode($result, true);
+$result = file_get_contents('currentStatsOldOld.tmp');
+$currentStatsOldOld = json_decode($result, true);
+
 $stat['hashrate'] = number_format( round( $obj['data']['currentHashrate']/1000000, 2),2 );
 $stat['avghashrate'] = number_format( round( $obj['data']['averageHashrate']/1000000, 2),2 );
 $stat['reportedhashrate'] = number_format( round( $obj['data']['reportedHashrate']/1000000, 2),2 );
@@ -160,6 +167,9 @@ if ( $stat['ehour'] != '0' ) {
 	$stat['uyear'] = $stat['uweek']*52;
 
 	$stat['unpaid'] = number_format((($obj['data']['unpaid']/10)/100000000000000000),5);
+	$stat['currentStatsUnpaid'] = number_format((($currentStats['data']['unpaid']/10)/100000000000000000),5);
+	$stat['currentStatsOldUnpaid'] = number_format((($currentStatsOld['data']['unpaid']/10)/100000000000000000),5);
+	$stat['currentStatsOldOldUnpaid'] = number_format((($currentStatsOldOld['data']['unpaid']/10)/100000000000000000),5);
 
 	$stat['eneeded'] = ($stat['payout'])-($obj['data']['unpaid']/1000000000000000000) ;
 	$stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
