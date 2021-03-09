@@ -35,9 +35,8 @@
 				<li class="list-group-item">Unpaid 	<span class="pull-right">&Xi;<?=number_format($stat['unpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['unpaid']),2)?>)</span></li>
 				<li class="list-group-item">Est &Xi; (yesterday)		<span class="pull-right">&Xi;<?=number_format(($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']),5)?> (<?=$fiat['sym'].number_format(($ethtofiat * ($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'])),2)?>)</span></li>
 				<li class="list-group-item">Est &Xi; (2 days ago)		<span class="pull-right">&Xi;<?=number_format(($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']),5)?> (<?=$fiat['sym'].number_format(($ethtofiat * ($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'])),2)?>)</span></li>
+				<li class="list-group-item">Payout Figure		<span class="pull-right">&Xi;0.1 (<?=$fiat['sym'].number_format(($ethtofiat / 10),2)?>)</span></li>
 				<li class="list-group-item">Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['eneeded']),2)?>)</span></li>
-				<li class="list-group-item">Time Left	<span class="pull-right"><?=core_calc_remaining($stat['hoursuntil'])?></span></li>
-				<li class="list-group-item">Next Payout	<span class="pull-right"><?=$stat['paytime']?></span></li>
 			</ul>
 		</div>
 
@@ -50,7 +49,8 @@
 				</li>				
 				<li class="list-group-item">Hashrate (/hr)	<span class="pull-right"><?=$stat['hashrate']?> MH/s</span></li>
 				<li class="list-group-item">Hashrate (/24hr)		<span class="pull-right"><?=$stat['avghashrate']?> MH/s</span></li>
-				<li class="list-group-item">Payout Figure		<span class="pull-right">&Xi;0.1 (<?=$fiat['sym'].number_format(($ethtofiat / 10),2)?>)</span></li>
+				<li class="list-group-item">Next Payout	<span class="pull-right"><?=$stat['paytime']?></span></li>
+				<li class="list-group-item">Time Left	<span class="pull-right"><?=core_calc_remaining($stat['hoursuntil'])?></span></li>
 			</ul>
 		</div>
 
