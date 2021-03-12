@@ -170,6 +170,20 @@ if ( $stat['ehour'] != '0' ) {
 	$stat['currentStatsUnpaid'] = number_format((($currentStats['data']['unpaid']/10)/100000000000000000),5);
 	$stat['currentStatsOldUnpaid'] = number_format((($currentStatsOld['data']['unpaid']/10)/100000000000000000),5);
 	$stat['currentStatsOldOldUnpaid'] = number_format((($currentStatsOldOld['data']['unpaid']/10)/100000000000000000),5);
+	if (($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']) > 0) {
+		$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'];
+	}
+	else {
+		$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'];
+	}
+
+	if (($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']) > 0) {
+		$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'];
+	}
+	else {
+		$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'];
+	}
+	
 
 	$stat['eneeded'] = ($stat['payout'])-($obj['data']['unpaid']/1000000000000000000) ;
 	$stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
