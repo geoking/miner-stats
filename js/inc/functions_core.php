@@ -170,6 +170,14 @@ if ( $stat['ehour'] != '0' ) {
 	$stat['currentStatsUnpaid'] = number_format((($currentStats['data']['unpaid']/10)/100000000000000000),5);
 	$stat['currentStatsOldUnpaid'] = number_format((($currentStatsOld['data']['unpaid']/10)/100000000000000000),5);
 	$stat['currentStatsOldOldUnpaid'] = number_format((($currentStatsOldOld['data']['unpaid']/10)/100000000000000000),5);
+
+	if (($stat['unpaid'] - $stat['currentStatsUnpaid']) > 0) {
+		$stat['todayUnpaid'] = $stat['unpaid'] - $stat['currentStatsUnpaid'];
+	}
+	else {
+		$stat['todayUnpaid'] = $stat['unpaid'];
+	}
+
 	if (($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']) > 0) {
 		$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'];
 	}
