@@ -191,8 +191,11 @@ if ( $stat['ehour'] != '0' ) {
 	else {
 		$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'];
 	}
-	
 
+	$tomorrow = strtotime('tomorrow');
+	$now = strtotime('now');
+
+	$stat['todayEstimated'] = ($stat['todayUnpaid'] / (86400 - ($tomorrow - $now))) * 86400;
 	$stat['eneeded'] = ($stat['payout'])-($obj['data']['unpaid']/1000000000000000000) ;
 	$stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
 
