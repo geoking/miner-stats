@@ -12,7 +12,7 @@
 	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<title>(<?=$fiat['sym'].number_format(($stat['eday']*$ethtofiat),2)?>) GKING ETHERMINE STATS</title>
+	<title>(<?=$fiat['sym'].number_format(($stat['todayEstimated']*$ethtofiat),2)?>) GKING ETHERMINE STATS</title>
 	<meta http-equiv="Refresh" content="300">
   </head>
 
@@ -32,11 +32,11 @@
 		<div class="col-md-4">
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Payments</h4></li>
-				<li class="list-group-item">&Xi; Unpaid 	<span class="pull-right">&Xi;<?=number_format($stat['unpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['unpaid']),2)?>)</span></li>
 				<li class="list-group-item">&Xi; Today 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
+				<li class="list-group-item">&Xi; Today (est) 	<span class="pull-right">&Xi;<?=number_format($stat['todayEstimated'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayEstimated']),2)?>)</span></li>
 				<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
 				<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
-				<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$stat['payout']?> (<?=$fiat['sym'].number_format(($ethtofiat / 10),2)?>)</span></li>
+				<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$stat['payout']?> (<?=$fiat['sym'].number_format(($ethtofiat / 20),2)?>)</span></li>
 				<li class="list-group-item">&Xi; Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['eneeded']),2)?>)</span></li>
 			</ul>
 		</div>
@@ -44,6 +44,7 @@
 		<div class="col-md-4">
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Statistics</h4></li>
+				<li class="list-group-item">&Xi; Unpaid 	<span class="pull-right">&Xi;<?=number_format($stat['unpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['unpaid']),2)?>)</span></li>
 				<li class="list-group-item">
 					<?php if ( $conf['show_reportedhash'] == '0' ) { ?>Mined<span class="pull-right">&Xi;<?=$stat['unpaid']?></span> <?php } ?>
 					<?php if ( $conf['show_reportedhash'] == '1' ) { ?>Hashrate (now)<span class="pull-right"><?=$stat['reportedhashrate']?> MH/s</span> <?php } ?>
