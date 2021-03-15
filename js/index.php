@@ -58,11 +58,17 @@
 
 		<div class="col-md-4">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Prices (1hr +/-%)</h4></li>
+				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Watchlist (1hr +/-%)</h4></li>
 				<?php if ( $ethchange >= '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
 				<?php if ( $ethchange < '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
 				<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
 				<?php if ( $btcchange <'0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item">BAT 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($battofiat - $batchange) / $battofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($battofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $btcchange <'0' ) { ?><li class="list-group-item">BAT	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($battofiat - $batchange) / $battofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($battofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item">DOGE 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($dogetofiat - $dogechange) / $dogetofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($dogetofiat,3) ?></span> </li> <?php } ?>
+				<?php if ( $btcchange <'0' ) { ?><li class="list-group-item">DOGE	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($dogetofiat - $dogechange) / $dogetofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($dogetofiat,3) ?></span> </li> <?php } ?>
+				<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item">ZRX 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($zrxtofiat,2) ?></span> </li> <?php } ?>
+				<?php if ( $btcchange <'0' ) { ?><li class="list-group-item">ZRX	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($zrxtofiat,2) ?></span> </li> <?php } ?>
 			</ul>
 		</div>
 
@@ -78,7 +84,7 @@
 
 		<div class="col-md-4">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>&Xi;TH</h4></li>
+				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>&Xi;TH (est avg)</h4></li>
 				<?php if ( $conf['show_hour'] == '1' ) { ?>	<li class="list-group-item">Hour 	<span class="pull-right">&Xi;<?=number_format($stat['ehour'],5)?></span></li>	<?php } ?>
 				<?php if ( $conf['show_day'] == '1' ) { ?>		<li class="list-group-item">Day 	<span class="pull-right">&Xi;<?=number_format($stat['eday'],5)?></span></li>	<?php } ?>
 				<?php if ( $conf['show_week'] == '1' ) { ?>	<li class="list-group-item">Week 	<span class="pull-right">&Xi;<?=number_format($stat['eweek'],5)?></span></li>	<?php } ?>
@@ -89,7 +95,7 @@
 
 		<div class="col-md-4">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><?=$fiat['code']?></h4></li>
+				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><?=$fiat['code']?> (est avg)</h4></li>
 				<?php if ( $conf['show_hour'] == '1' ) { ?>	<li class="list-group-item">Hour 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ehour']*$ethtofiat),2)?></span></li><?php } ?>
 				<?php if ( $conf['show_day'] == '1' ) { ?>		<li class="list-group-item">Day 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eday']*$ethtofiat),2)?></span></li><?php } ?>
 				<?php if ( $conf['show_week'] == '1' ) { ?>	<li class="list-group-item">Week 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eweek']*$ethtofiat),2)?></span></li><?php } ?>
@@ -100,7 +106,7 @@
 
 		<div class="col-md-4">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>฿TC</h4></li>
+				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>฿TC (est avg)</h4></li>
 				<?php if ( $conf['show_hour'] == '1' ) { ?>	<li class="list-group-item">Hour 	<span class="pull-right">฿<?=number_format($stat['bhour'],5)?></span></li>	<?php } ?>
 				<?php if ( $conf['show_day'] == '1' ) { ?>		<li class="list-group-item">Day 	<span class="pull-right">฿<?=number_format($stat['bday'],5)?></span></li>	<?php } ?>
 				<?php if ( $conf['show_week'] == '1' ) { ?>	<li class="list-group-item">Week 	<span class="pull-right">฿<?=number_format($stat['bweek'],5)?></span></li>	<?php } ?>
