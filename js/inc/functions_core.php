@@ -26,16 +26,16 @@ function core_dec($fin) {
     return $dec;
 }
 
-function core_calc_remaining($fin) {
+function core_calc_remaining($fin, $withMinutes) {
 	$days = (gmdate('j', floor($fin * 3600)))-1;
 	$hours = gmdate('G', floor($fin * 3600));
-	$minutes = gmdate('i', floor($fin * 3600));
+	if ($withMinutes) { $minutes = gmdate('i', floor($fin * 3600)); }
 	// $seconds = gmdate('s', floor($fin * 3600));
 	
 	$output = '';
 	if ( $days != '0' ) { if ( $days != '1' ) { $p = ' days'; } else { $p = ' day'; } $output = $output.$days.$p; }
 	if ( $hours != '0' ) { if ( $hours != '1' ) { $p = ' hrs'; } else { $p = ' hr'; } $output = $output.' '.$hours.$p; }
-	if ( $minutes != '0' ) { if ( $minutes != '1' ) { $p = ' mins'; } else { $p = ' min'; } $output = $output.' '.$minutes.$p; }
+	if ($withMinutes) { if ( $minutes != '0' ) { if ( $minutes != '1' ) { $p = ' mins'; } else { $p = ' min'; } $output = $output.' '.$minutes.$p; } }
 	// if ( $seconds != '0' ) { $output = $output.', '.$seconds.' secs'; }
 
 	return $output;

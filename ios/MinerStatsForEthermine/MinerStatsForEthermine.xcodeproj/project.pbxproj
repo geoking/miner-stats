@@ -45,6 +45,7 @@
 		5E438BDD2611F8F100472ECE /* MinerStatsForEthermineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinerStatsForEthermineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E438BE12611F8F100472ECE /* MinerStatsForEthermineUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinerStatsForEthermineUITests.swift; sourceTree = "<group>"; };
 		5E438BE32611F8F100472ECE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E7D4A28261238D000EBEA83 /* MinerStatsForEthermine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MinerStatsForEthermine.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +96,7 @@
 		5E438BC32611F8F000472ECE /* MinerStatsForEthermine */ = {
 			isa = PBXGroup;
 			children = (
+				5E7D4A28261238D000EBEA83 /* MinerStatsForEthermine.entitlements */,
 				5E438BC42611F8F000472ECE /* MinerStatsForEthermineApp.swift */,
 				5E438BC62611F8F000472ECE /* ContentView.swift */,
 				5E438BC82611F8F100472ECE /* Assets.xcassets */,
@@ -417,6 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MinerStatsForEthermine/MinerStatsForEthermine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MinerStatsForEthermine/Preview Content\"";
 				DEVELOPMENT_TEAM = Q4869L76QY;
@@ -429,6 +432,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gking.MinerStatsForEthermine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -439,6 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MinerStatsForEthermine/MinerStatsForEthermine.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"MinerStatsForEthermine/Preview Content\"";
 				DEVELOPMENT_TEAM = Q4869L76QY;
@@ -451,6 +456,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.gking.MinerStatsForEthermine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

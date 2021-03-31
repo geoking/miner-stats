@@ -8,9 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selection = 0
+ 
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        TabView(selection: $selection){
+            Text("First View")
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Text("First")
+                    }
+                }
+                .tag(0)
+            Text("Second View")
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Text("Second")
+                    }
+                }
+                .tag(1)
+            Text("Third View")
+            .font(.title)
+            .tabItem {
+                VStack {
+                    Text("Third")
+                }
+            }
+            .tag(2)
+        }
     }
 }
 

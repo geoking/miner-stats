@@ -24,6 +24,19 @@
 			<h1>GKING ETHERMINE STATS</h1>
 		</div>
 
+		<div class="col-md-4">
+			<h2>EST TODAY</h2>
+			<h3>&Xi;<?=number_format($stat['todayEstimated'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayEstimated']),2)?>)</h3>
+		</div>
+		<div class="col-md-4">
+			<h2>UNPAID</h2>
+			<h3>&Xi;<?=number_format($stat['unpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['unpaid']),2)?>)</h3>
+		</div>
+		<div class="col-md-4">
+			<h2>EST PAYOUT</h2>
+			<h3><?=core_calc_remaining($stat['hoursuntil'], false)?></h3>
+		</div>
+
 		<?php if ( $stat['waiting'] == '1' ) {
 			echo '<div class="col-md-12"><p align="center"><em>There is insufficient data to produce any useful metrics.<br>Please check your wallet settings in config.php.<br>The pool you are querying may also be limiting API requests - please try later.</em></p></div>';
 			die;
@@ -33,7 +46,6 @@
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Payments</h4></li>
 				<li class="list-group-item">&Xi; Today 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
-				<li class="list-group-item">&Xi; Today (est) 	<span class="pull-right">&Xi;<?=number_format($stat['todayEstimated'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayEstimated']),2)?>)</span></li>
 				<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
 				<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
 				<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$stat['payout']?> (<?=$fiat['sym'].number_format(($ethtofiat / 20),2)?>)</span></li>
@@ -44,7 +56,6 @@
 		<div class="col-md-4">
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Statistics</h4></li>
-				<li class="list-group-item">&Xi; Unpaid 	<span class="pull-right">&Xi;<?=number_format($stat['unpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['unpaid']),2)?>)</span></li>
 				<li class="list-group-item">
 					<?php if ( $conf['show_reportedhash'] == '0' ) { ?>Mined<span class="pull-right">&Xi;<?=$stat['unpaid']?></span> <?php } ?>
 					<?php if ( $conf['show_reportedhash'] == '1' ) { ?>Hashrate (now)<span class="pull-right"><?=$stat['reportedhashrate']?> MH/s</span> <?php } ?>
@@ -52,7 +63,7 @@
 				<li class="list-group-item">Hashrate (/hr)	<span class="pull-right"><?=$stat['hashrate']?> MH/s</span></li>
 				<li class="list-group-item">Hashrate (/24hr)		<span class="pull-right"><?=$stat['avghashrate']?> MH/s</span></li>
 				<li class="list-group-item">Next Payout	<span class="pull-right"><?=$stat['paytime']?></span></li>
-				<li class="list-group-item">Time Left	<span class="pull-right"><?=core_calc_remaining($stat['hoursuntil'])?></span></li>
+				<li class="list-group-item">Time Left	<span class="pull-right"><?=core_calc_remaining($stat['hoursuntil'], true)?></span></li>
 			</ul>
 		</div>
 
