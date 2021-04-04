@@ -49,8 +49,8 @@
 		<div id="showDiv">
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Payments</h4></li>
-					<li class="list-group-item">&Xi; Today 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Earnings</h4></li>
+					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$stat['payout']?> (<?=$fiat['sym'].number_format(($ethtofiat / 20),2)?>)</span></li>
@@ -60,25 +60,22 @@
 
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Statistics</h4></li>
-					<li class="list-group-item">
-						<?php if ( $conf['show_reportedhash'] == '0' ) { ?>Mined<span class="pull-right">&Xi;<?=$stat['unpaid']?></span> <?php } ?>
-						<?php if ( $conf['show_reportedhash'] == '1' ) { ?>Hashrate (now)<span class="pull-right"><?=$stat['reportedhashrate']?> MH/s</span> <?php } ?>
-					</li>				
-					<li class="list-group-item">Hashrate (/hr)	<span class="pull-right"><?=$stat['hashrate']?> MH/s</span></li>
-					<li class="list-group-item">Hashrate (/24hr)		<span class="pull-right"><?=$stat['avghashrate']?> MH/s</span></li>
-					<li class="list-group-item">Temperature	<span class="pull-right"><?=$stat['temp']?>°C</span></li>
-					<li class="list-group-item">Next Payout	<span class="pull-right"><?=$stat['paytime']?></span></li>
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Minerstat</h4></li>
+					<li class="list-group-item">Daily	<span class="pull-right">&Xi;<?=number_format($stat['mseday'],5)?> (<?=$fiat['sym'].number_format(($stat['mseday']*$ethtofiat),2)?>)</span></li>
+					<li class="list-group-item">Hashrate	<span class="pull-right"><?=$stat['hashrate']?> MH/s @ <?=$stat['power']?>W</span></li>
+					<li class="list-group-item">Temp / Fan Speed	<span class="pull-right"><?=$stat['temp']?>°C / <?=$stat['fanspeed']?>%</span></li>
+					<li class="list-group-item">Efficiency	<span class="pull-right"><?=$stat['accepted']?>/<?=$stat['rejected']?> (<?=number_format(100 - (($stat['rejected'] / $stat['accepted']) * 100), 2)?>%)</span></li>
+					<li class="list-group-item">Uptime	<span class="pull-right"><?=$stat['uptime']?></span></li>
 				</ul>
 			</div>
 
 			<div class="col-md-4">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Watchlist (1hr +/-%)</h4></li>
-					<?php if ( $ethchange >= '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
-					<?php if ( $ethchange < '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
 					<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
 					<?php if ( $btcchange <'0' ) { ?><li class="list-group-item">฿TC 	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
+					<?php if ( $ethchange >= '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
+					<?php if ( $ethchange < '0' ) { ?><li class="list-group-item">&Xi;TH 	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
 					<?php if ( $batchange >= '0' ) { ?><li class="list-group-item">BAT 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($battofiat - $batchange) / $battofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($battofiat,2) ?></span> </li> <?php } ?>
 					<?php if ( $batchange <'0' ) { ?><li class="list-group-item">BAT	<span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($battofiat - $batchange) / $battofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($battofiat,2) ?></span> </li> <?php } ?>
 					<?php if ( $dogechange >= '0' ) { ?><li class="list-group-item">DOGE 	<span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($dogetofiat - $dogechange) / $dogetofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($dogetofiat,3) ?></span> </li> <?php } ?>

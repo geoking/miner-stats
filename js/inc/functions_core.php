@@ -182,10 +182,15 @@ $currentStatsOld = json_decode($result, true);
 $result = file_get_contents('currentStatsOldOld.tmp');
 $currentStatsOldOld = json_decode($result, true);
 
+$stat['uptime'] = $msobj['WORKER1']['info']['uptime'];
+$stat['mseday'] = $msobj['WORKER1']['revenue']['coin'];
 $stat['temp'] = $msobj['WORKER1']['hardware'][0]['temp'];
-$stat['hashrate'] = number_format( round( $obj['data']['currentHashrate']/1000000, 2),2 );
-$stat['avghashrate'] = number_format( round( $obj['data']['averageHashrate']/1000000, 2),2 );
-$stat['reportedhashrate'] = number_format( round( $obj['data']['reportedHashrate']/1000000, 2),2 );
+$stat['fanspeed'] = $msobj['WORKER1']['hardware'][0]['fan'];
+$stat['hashrate'] = $msobj['WORKER1']['hardware'][0]['speed'];
+$stat['power'] = $msobj['WORKER1']['hardware'][0]['power'];
+$stat['accepted'] = $msobj['WORKER1']['mining']['shares']['accepted_share'];
+$stat['rejected'] = $msobj['WORKER1']['mining']['shares']['rejected_share'];
+
 $stat['payout'] = 0.05;
 $stat['emin'] = $obj['data']['coinsPerMin'];
 $stat['ehour'] = $stat['emin']*60;
