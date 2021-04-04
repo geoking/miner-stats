@@ -119,3 +119,4 @@ iOSInjectionProject/
 *.tmp
 js/.DS_Store
 .DS_Store
+js/inc/config.php
