@@ -42,10 +42,6 @@
 			die;
 		} ?>
 
-		<div id="showHideButtonDiv" class="col-md-12">
-			<button id="showHideButton" onclick="showHide()">Show average rates</button>
-		</div>
-
 		<div id="showDiv">
 			<div class="col-md-4">
 				<ul class="list-group">
@@ -130,7 +126,10 @@
 		</div>
 		<?php } ?>	
 
-		
+		<div id="showHideButtonDiv" class="col-md-12">
+			<button id="showHideButton" onclick="showHide()">Show average rates</button>
+		</div>
+
 	</div>
 
 	<div class="container">
