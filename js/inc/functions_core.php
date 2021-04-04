@@ -108,6 +108,16 @@ if ( is_null($obj) ) {
 	$cache = '0';
 }
 
+// get stats from minerstat
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_TIMEOUT, 4);
+curl_setopt($ch, CURLOPT_URL, 'https://api.minerstat.com/v2/stats/'.$conf['ms_access_key'].'/worker1');
+$result = curl_exec($ch);
+curl_close($ch);
+$msobj = json_decode($result, true);
+
 
 // gets crypto exchange rate for ETH using cryptonator.com/api
 $ch = curl_init();
@@ -172,6 +182,7 @@ $currentStatsOld = json_decode($result, true);
 $result = file_get_contents('currentStatsOldOld.tmp');
 $currentStatsOldOld = json_decode($result, true);
 
+$stat['temp'] = $msobj['WORKER1']['hardware'][0]['temp'];
 $stat['hashrate'] = number_format( round( $obj['data']['currentHashrate']/1000000, 2),2 );
 $stat['avghashrate'] = number_format( round( $obj['data']['averageHashrate']/1000000, 2),2 );
 $stat['reportedhashrate'] = number_format( round( $obj['data']['reportedHashrate']/1000000, 2),2 );
