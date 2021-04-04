@@ -127,7 +127,7 @@
 		<?php } ?>	
 
 		<div id="showHideButtonDiv" class="col-md-12">
-			<button id="showHideButton" onclick="showHide()">Show average rates</button>
+			<button id="showHideButton" style="display: none;" onclick="showHide()">Show average rates</button>
 		</div>
 
 	</div>
@@ -155,6 +155,8 @@
 				b.innerText = "Show overall stats";
 			}
 		}
+
+		window.onload = document.getElementById("showHideButton").style.display = "block";
 	</script>
 
   </body>
