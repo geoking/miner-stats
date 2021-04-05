@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/css/custom.css" rel="stylesheet">
+	<link href="/stats/css/custom.css" rel="stylesheet">
 	<!--[if lt IE 9]>
 	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -45,23 +45,23 @@
 		<div id="showDiv">
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Earnings</h4></li>
-					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$stat['payout']?> (<?=$fiat['sym'].number_format(($ethtofiat / 20),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['eneeded']),2)?>)</span></li>
-				</ul>
-			</div>
-
-			<div class="col-md-4">
-				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Minerstat</h4></li>
 					<li class="list-group-item">Daily	<span class="pull-right">&Xi;<?=number_format($stat['mseday'],5)?> (<?=$fiat['sym'].number_format(($stat['mseday']*$ethtofiat),2)?>)</span></li>
 					<li class="list-group-item">Hashrate	<span class="pull-right"><?=$stat['hashrate']?> MH/s @ <?=$stat['power']?>W</span></li>
 					<li class="list-group-item">Temp / Fan Speed	<span class="pull-right"><?=$stat['temp']?>°C / <?=$stat['fanspeed']?>%</span></li>
 					<li class="list-group-item">Efficiency	<span class="pull-right"><?=$stat['accepted']?>/<?=$stat['rejected']?> (<?=number_format(100 - (($stat['rejected'] / $stat['accepted']) * 100), 2)?>%)</span></li>
 					<li class="list-group-item">Uptime	<span class="pull-right"><?=$stat['uptime']?></span></li>
+				</ul>
+			</div>
+
+			<div class="col-md-4">
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Earnings</h4></li>
+					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$stat['payout']?> (<?=$fiat['sym'].number_format(($ethtofiat / 20),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['eneeded']),2)?>)</span></li>
 				</ul>
 			</div>
 

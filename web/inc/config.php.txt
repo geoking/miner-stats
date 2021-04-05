@@ -16,6 +16,10 @@
 // on ethermine.org
 	$conf['wallet'] = '0x';
 
+// --- minerstat access code ---
+// minerstat config access code
+	$conf['ms_access_key'] = 'x';
+
 
 // --- Timezone ---
 // Set this to your timezone, so that "next eth" and other date/time related 
