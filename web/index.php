@@ -47,7 +47,7 @@
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Minerstat</h4></li>
 					<li class="list-group-item">Daily	<span class="pull-right">&Xi;<?=number_format($stat['mseday'],5)?> (<?=$fiat['sym'].number_format(($stat['mseday']*$ethtofiat),2)?>)</span></li>
-					<li class="list-group-item">Hashrate	<span class="pull-right"><?=$stat['hashrate']?> MH/s @ <?=$stat['power']?>W</span></li>
+					<li class="list-group-item">Hashrate	<span class="pull-right"><?=number_format($stat['hashrate'],2)?> MH/s @ <?=$stat['power']?>W</span></li>
 					<li class="list-group-item">Temp / Fan Speed	<span class="pull-right"><?=$stat['temp']?>°C / <?=$stat['fanspeed']?>%</span></li>
 					<li class="list-group-item">Efficiency	<span class="pull-right"><?=$stat['accepted']?>/<?=$stat['rejected']?> (<?=number_format(100 - (($stat['rejected'] / $stat['accepted']) * 100), 2)?>%)</span></li>
 					<li class="list-group-item">Uptime	<span class="pull-right"><?=$stat['uptime']?></span></li>
