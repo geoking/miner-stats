@@ -49,7 +49,7 @@
 		<div id="showDiv">
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Minerstat</h4></li>
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href="https://my.minerstat.com/worker/worker1" target="_blank">Minerstat</a></h4></li>
 					<li class="list-group-item">Hashrate	<span class="pull-right"><?=number_format($stat['hashrate'],2)?> MH/s @ <?=$stat['power']?>W</span></li>
 					<li class="list-group-item">Temperature	<span class="pull-right"><?=$stat['temp']?>°C</span></li>
 					<li class="list-group-item">Fan Speed	<span class="pull-right"><?=$stat['fanspeed']?>%</span></li>
@@ -60,7 +60,7 @@
 
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Earnings</h4></li>
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://ethermine.org/miners/".$conf['wallet']."/dashboard"?> target="_blank">Earnings</a></h4></li>
 					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>

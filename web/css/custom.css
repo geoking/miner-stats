@@ -9,6 +9,11 @@ body {
 	background-color: #222;
 }
 
+a {
+    color: #66ccff;
+    text-decoration: none;
+}
+
 .list-group-item {
     background-color: #222;
 	color: #FFF;
