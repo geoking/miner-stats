@@ -141,7 +141,6 @@
 	</div>
 
 	<?=core_output_footerscripts()?>
-	<script src=<?= $conf["js_folder_path"]."showHide.js"?>></script>
 
   </body>
 

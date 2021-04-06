@@ -3,9 +3,11 @@
 // Core functions file
 
 function core_output_footerscripts() {
+	include('config.php');
 	echo '
 		<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="'.$conf["js_folder_path"].'showHide.js"></script>
 	';
 }
 
