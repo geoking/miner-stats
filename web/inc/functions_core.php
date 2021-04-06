@@ -117,6 +117,7 @@ curl_setopt($ch, CURLOPT_URL, 'https://api.minerstat.com/v2/stats/'.$conf['ms_ac
 $result = curl_exec($ch);
 curl_close($ch);
 $msobj = json_decode($result, true);
+$msobj = reset($msobj);
 
 
 // gets crypto exchange rate for ETH using cryptonator.com/api
@@ -182,16 +183,16 @@ $currentStatsOld = json_decode($result, true);
 $result = file_get_contents('currentStatsOldOld.tmp');
 $currentStatsOldOld = json_decode($result, true);
 
-$stat['uptime'] = $msobj['WORKER1']['info']['uptime'];
-$stat['mseday'] = $msobj['WORKER1']['revenue']['coin'];
-$stat['temp'] = $msobj['WORKER1']['hardware'][0]['temp'];
-$stat['fanspeed'] = $msobj['WORKER1']['hardware'][0]['fan'];
-$stat['hashrate'] = $msobj['WORKER1']['hardware'][0]['speed'];
-$stat['power'] = $msobj['WORKER1']['hardware'][0]['power'];
-$stat['accepted'] = $msobj['WORKER1']['mining']['shares']['accepted_share'];
-$stat['rejected'] = $msobj['WORKER1']['mining']['shares']['rejected_share'];
+$stat['uptime'] = $msobj['info']['uptime'];
+$stat['mseday'] = $msobj['revenue']['coin'];
+$stat['temp'] = $msobj['hardware'][0]['temp'];
+$stat['fanspeed'] = $msobj['hardware'][0]['fan'];
+$stat['hashrate'] = $msobj['hardware'][0]['speed'];
+$stat['power'] = $msobj['hardware'][0]['power'];
+$stat['accepted'] = $msobj['mining']['shares']['accepted_share'];
+$stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
 
-$stat['payout'] = 0.05;
+$stat['payout'] = $conf['payout_threshold'];
 $stat['emin'] = $obj['data']['coinsPerMin'];
 $stat['ehour'] = $stat['emin']*60;
 $stat['eday'] = $stat['ehour']*24;
@@ -243,39 +244,10 @@ if ( $stat['ehour'] != '0' ) {
 
 	$tomorrow = strtotime('tomorrow');
 	$now = strtotime('now');
-
 	$stat['todayEstimated'] = ($stat['todayUnpaid'] / (86400 - ($tomorrow - $now))) * 86400;
 	$stat['eneeded'] = ($stat['payout'])-($obj['data']['unpaid']/1000000000000000000) ;
 	$stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
-
 	$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
-
-	if ($conf['show_power'] == 1) {
-		// calculates the power costs of mining
-		$stat['power-consumed'] = ($conf['watts']/1000)*8766; //8766 hours in 1 year
-		$stat['power-annual'] = $stat['power-consumed']*$conf['kwh_rate'];
-		$stat['power-month'] = $stat['power-annual']/12;
-		$stat['power-week'] = $stat['power-annual']/52;
-		$stat['power-day'] = $stat['power-annual']/365;
-		$stat['power-hour'] = $stat['power-day']/24;
-		$stat['power-min'] = $stat['power-hour']/60;
-
-		// Profit values - What we mine vs what it costs us for electricity
-		//ETH
-		// $stat['epmin'] = ($stat['emin'] * $ethtofiat) - $kwh['cost_min'];
-		$stat['ehourp'] = ($stat['ehour']*$ethtofiat) - $stat['power-hour'];
-		// $stat['epday'] = ($stat['eday'] * $ethtofiat) - $kwh['cost_day'];
-		// $stat['epweek'] = ($stat['eweek'] * $ethtofiat) - $kwh['cost_week'];
-		// $stat['epmonth'] = ($stat['emonth'] * $ethtofiat) - $kwh['cost_month'];
-		// //BTC
-		// $stat['bpmin'] = ($stat['bmin'] * $btctofiat) - $kwh['cost_min'];
-		// $stat['bphour'] = ($stat['bhour'] * $btctofiat) - $kwh['cost_hour'];
-		// $stat['bpday'] = ($stat['bday'] * $btctofiat) - $kwh['cost_day'];
-		// $stat['bpweek'] = ($stat['bweek'] * $btctofiat) - $kwh['cost_week'];
-		// $stat['bpmonth'] = ($stat['bmonth'] * $btctofiat) - $kwh['cost_month'];
-
-	}
-
 } else { $stat['waiting'] = 1; }
 
 ?>

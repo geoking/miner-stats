@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/stats/css/custom.css" rel="stylesheet">
+	<link href=<?= $conf['css_folder_path']?> rel="stylesheet">
 	<!--[if lt IE 9]>
 	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -49,7 +49,7 @@
 		<div id="showDiv">
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href="https://my.minerstat.com/worker/worker1" target="_blank">Minerstat</a></h4></li>
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://my.minerstat.com/worker/".$conf['ms_worker_name']?> target="_blank">Minerstat</a></h4></li>
 					<li class="list-group-item">Hashrate	<span class="pull-right"><?=number_format($stat['hashrate'],2)?> MH/s @ <?=$stat['power']?>W</span></li>
 					<li class="list-group-item">Efficiency	<span class="pull-right"><?=$stat['accepted']?>/<?=$stat['rejected']?> (<?=number_format(100 - (($stat['rejected'] / $stat['accepted']) * 100), 2)?>%)</span></li>
 					<li class="list-group-item">Temperature	<span class="pull-right"><?=$stat['temp']?>°C</span></li>
@@ -89,10 +89,10 @@
 			<div class="col-md-4">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>&Xi;TH (est avg)</h4></li>
-					<?php if ( $conf['show_hour'] == '1' ) { ?>	<li class="list-group-item">Hour 	<span class="pull-right">&Xi;<?=number_format($stat['ehour'],5)?></span></li>	<?php } ?>
-					<?php if ( $conf['show_day'] == '1' ) { ?>		<li class="list-group-item">Day 	<span class="pull-right">&Xi;<?=number_format($stat['eday'],5)?></span></li>	<?php } ?>
-					<?php if ( $conf['show_week'] == '1' ) { ?>	<li class="list-group-item">Week 	<span class="pull-right">&Xi;<?=number_format($stat['eweek'],5)?></span></li>	<?php } ?>
-					<?php if ( $conf['show_month'] == '1' ) { ?>	<li class="list-group-item">Month 	<span class="pull-right">&Xi;<?=number_format($stat['emonth'],5)?></span></li>	<?php } ?>
+					<li class="list-group-item">Hour 	<span class="pull-right">&Xi;<?=number_format($stat['ehour'],5)?></span></li>
+					<li class="list-group-item">Day 	<span class="pull-right">&Xi;<?=number_format($stat['eday'],5)?></span></li>
+					<li class="list-group-item">Week 	<span class="pull-right">&Xi;<?=number_format($stat['eweek'],5)?></span></li>
+					<li class="list-group-item">Month 	<span class="pull-right">&Xi;<?=number_format($stat['emonth'],5)?></span></li>
 					<li class="list-group-item">Year 	<span class="pull-right">&Xi;<?=number_format($stat['eyear'],5)?></span></li>
 				</ul>
 			</div>
@@ -100,10 +100,10 @@
 			<div class="col-md-4">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><?=$fiat['code']?> (est avg)</h4></li>
-					<?php if ( $conf['show_hour'] == '1' ) { ?>	<li class="list-group-item">Hour 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ehour']*$ethtofiat),2)?></span></li><?php } ?>
-					<?php if ( $conf['show_day'] == '1' ) { ?>		<li class="list-group-item">Day 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eday']*$ethtofiat),2)?></span></li><?php } ?>
-					<?php if ( $conf['show_week'] == '1' ) { ?>	<li class="list-group-item">Week 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eweek']*$ethtofiat),2)?></span></li><?php } ?>
-					<?php if ( $conf['show_month'] == '1' ) { ?>	<li class="list-group-item">Month 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['emonth']*$ethtofiat),2)?></span></li><?php } ?>
+					<li class="list-group-item">Hour 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ehour']*$ethtofiat),2)?></span></li>
+					<li class="list-group-item">Day 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eday']*$ethtofiat),2)?></span></li>
+					<li class="list-group-item">Week 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eweek']*$ethtofiat),2)?></span></li>
+					<li class="list-group-item">Month 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['emonth']*$ethtofiat),2)?></span></li>
 					<li class="list-group-item">Year 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eyear']*$ethtofiat),2)?></span></li>
 				</ul>
 			</div>
@@ -111,16 +111,15 @@
 			<div class="col-md-4">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>฿TC (est avg)</h4></li>
-					<?php if ( $conf['show_hour'] == '1' ) { ?>	<li class="list-group-item">Hour 	<span class="pull-right">฿<?=number_format($stat['bhour'],5)?></span></li>	<?php } ?>
-					<?php if ( $conf['show_day'] == '1' ) { ?>		<li class="list-group-item">Day 	<span class="pull-right">฿<?=number_format($stat['bday'],5)?></span></li>	<?php } ?>
-					<?php if ( $conf['show_week'] == '1' ) { ?>	<li class="list-group-item">Week 	<span class="pull-right">฿<?=number_format($stat['bweek'],5)?></span></li>	<?php } ?>
-					<?php if ( $conf['show_month'] == '1' ) { ?>	<li class="list-group-item">Month 	<span class="pull-right">฿<?=number_format($stat['bmonth'],5)?></span></li>	<?php } ?>
+					<li class="list-group-item">Hour 	<span class="pull-right">฿<?=number_format($stat['bhour'],5)?></span></li>
+					<li class="list-group-item">Day 	<span class="pull-right">฿<?=number_format($stat['bday'],5)?></span></li>
+					<li class="list-group-item">Week 	<span class="pull-right">฿<?=number_format($stat['bweek'],5)?></span></li>
+					<li class="list-group-item">Month 	<span class="pull-right">฿<?=number_format($stat['bmonth'],5)?></span></li>
 					<li class="list-group-item">Year 	<span class="pull-right">฿<?=number_format($stat['byear'],5)?></span></li>
 				</ul>
 			</div>
 		</div>
 
-		<?php if ( $conf['show_bar'] == '1' ) { ?>
 		<div class="col-md-12">
 			<div class="progress">
 			  	<div class="progress-bar progress-bar-striped progress-bar-<?=$conf['colour']?> active" role="progressbar" aria-valuenow="<?=$stat['unpaid']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=number_format(($stat['unpaid']/$stat['payout'])*100)?>%">
@@ -128,7 +127,6 @@
 				</div>
 			</div><br>
 		</div>
-		<?php } ?>	
 
 		<div id="showHideButtonDiv" class="col-md-12">
 			<button id="showHideButton" style="display: none;" onclick="showHide()">Show average rates</button>
@@ -143,25 +141,7 @@
 	</div>
 
 	<?=core_output_footerscripts()?>
-
-	<script>
-		function showHide() {
-			var x = document.getElementById("showDiv");
-			var y = document.getElementById("hideDiv");
-			var b = document.getElementById("showHideButton");
-			if (x.style.display === "none") {
-				x.style.display = "block";
-				y.style.display = "none";
-				b.innerText = "Show average rates";
-			} else {
-				x.style.display = "none";
-				y.style.display = "block";
-				b.innerText = "Show overall stats";
-			}
-		}
-
-		window.onload = document.getElementById("showHideButton").style.display = "block";
-	</script>
+	<script src=<?= $conf["js_folder_path"]."showHide.js"?>></script>
 
   </body>
 
