@@ -12,7 +12,7 @@
 	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<title>(<?=$fiat['sym'].number_format(($stat['todayEstimated']*$ethtofiat),2)?>) GKING ETHERMINE STATS</title>
+	<title>(<?=$fiat['sym'].number_format(($stat['todayEstimated']*$ethtofiat),2)?>) GK &Xi; STATS</title>
 	<meta http-equiv="Refresh" content="300">
   </head>
 
@@ -21,7 +21,7 @@
 	<div class="container">
 
 		<div class="col-md-12">
-			<h1>GKING ETHERMINE STATS</h1>
+			<h1>GK &Xi; STATS</h1>
 		</div>
 
 		<div class="col-md-3">
