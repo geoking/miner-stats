@@ -16,6 +16,12 @@ function core_getkey() {
 	return $confkey;
 }
 
+function core_getcryptourl($crypto) {
+	include('config.php');
+	$url = 'https://uk.finance.yahoo.com/quote/'.$crypto.'-'.$conf['fiat'];
+	return $url;
+}
+
 function core_enc($fin) {
 	$key = core_getkey();
     $enc = base64_encode( mcrypt_encrypt( MCRYPT_RIJNDAEL_256, md5( $key ), $fin, MCRYPT_MODE_CBC, md5( md5( $key ) ) ) );
