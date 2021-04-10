@@ -80,7 +80,7 @@
 
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Watchlist (1hr +/-%)</h4></li>
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href='https://uk.finance.yahoo.com/cryptocurrencies' target="_blank">Watchlist (1hr +/-%)</a></h4></li>
 					<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php }
 					else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
 					<?php if ( $ethchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH')?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php }
