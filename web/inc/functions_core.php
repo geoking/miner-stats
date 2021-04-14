@@ -16,9 +16,9 @@ function core_getkey() {
 	return $confkey;
 }
 
-function core_getcryptourl($crypto) {
+function core_getcryptourl($crypto, $fiat) {
 	include('config.php');
-	$url = 'https://uk.finance.yahoo.com/quote/'.$crypto.'-'.$conf['fiat'];
+	$url = 'https://uk.finance.yahoo.com/quote/'.$crypto.'-'.$fiat;
 	return $url;
 }
 
