@@ -200,6 +200,8 @@ $stat['power'] = $msobj['hardware'][0]['power'];
 $stat['accepted'] = $msobj['mining']['shares']['accepted_share'];
 $stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
 
+$stat['usdrate'] = $msobj['revenue']['cprice'] / $ethtofiat;
+
 $stat['payout'] = $conf['payout_threshold'];
 $stat['emin'] = $obj['data']['coinsPerMin'];
 $stat['ehour'] = $stat['emin']*60;
