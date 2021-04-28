@@ -13,7 +13,7 @@
 	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<title>(<?=$fiat['sym'].number_format(($stat['todayEstimated']*$ethtofiat),2)?>) GK &Xi; STATS</title>
-	<meta http-equiv="Refresh" content="300">
+	<meta http-equiv="Refresh" content="120">
   </head>
 
   <body>
@@ -22,6 +22,7 @@
 
 		<div class="col-md-12">
 			<h1>GK &Xi; STATS</h1>
+			<h5>Last updated: <?=$stat['now']?> (<a href="/stats" class="fa fa-refresh"></a>)</h5>
 		</div>
 
 		<div class="col-md-3">
@@ -58,10 +59,10 @@
 				else { ?>
 					<ul class="list-group">
 						<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://my.minerstat.com/worker/".$conf['ms_worker_name']?> target="_blank">Minerstat</a></h4></li>
-						<li class="list-group-item">Hashrate	<span class="pull-right"><?=number_format($stat['hashrate'],2)?> MH/s @ <?=$stat['power']?>W</span></li>
+						<li class="list-group-item">Hashrate	<span class="pull-right"><?=number_format($stat['hashrate'],2)?> <?=$stat['hashrate_unit']?>/s @ <?=$stat['power']?>W</span></li>
 						<li class="list-group-item">Efficiency	<span class="pull-right"><?=$stat['accepted']?>/<?=$stat['rejected']?> (<?=number_format(100 - (($stat['rejected'] / $stat['accepted']) * 100), 2)?>%)</span></li>
-						<li class="list-group-item">Temperature	<span class="pull-right"><?=$stat['temp']?>°C</span></li>
-						<li class="list-group-item">Fan Speed	<span class="pull-right"><?=$stat['fanspeed']?>%</span></li>
+						<li class="list-group-item">Temperature	<span class="pull-right"><?=$stat['temp0']?>°C / <?=$stat['temp1']?>°C</span></li>
+						<li class="list-group-item">Fan Speed	<span class="pull-right"><?=$stat['fanspeed0']?>% / <?=$stat['fanspeed1']?>%</span></li>
 						<li class="list-group-item">Uptime	<span class="pull-right"><?=$stat['uptime']?></span></li>
 					</ul>
 				<?php } ?>

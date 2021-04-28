@@ -193,10 +193,13 @@ $currentStatsOldOld = json_decode($result, true);
 
 $stat['uptime'] = $msobj['info']['uptime'];
 $stat['mseday'] = $msobj['revenue']['coin'];
-$stat['temp'] = $msobj['hardware'][0]['temp'];
-$stat['fanspeed'] = $msobj['hardware'][0]['fan'];
-$stat['hashrate'] = $msobj['hardware'][0]['speed'];
-$stat['power'] = $msobj['hardware'][0]['power'];
+$stat['temp0'] = $msobj['hardware'][0]['temp'];
+$stat['fanspeed0'] = $msobj['hardware'][0]['fan'];
+$stat['temp1'] = $msobj['hardware'][1]['temp'];
+$stat['fanspeed1'] = $msobj['hardware'][1]['fan'];
+$stat['hashrate'] = $msobj['mining']['hashrate']['hashrate'];
+$stat['hashrate_unit'] = $msobj['mining']['hashrate']['hashrate_unit'];
+$stat['power'] = $msobj['hardware'][0]['power'] + $msobj['hardware'][1]['power'];
 $stat['accepted'] = $msobj['mining']['shares']['accepted_share'];
 $stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
 
@@ -258,6 +261,7 @@ if ( $stat['ehour'] != '0' ) {
 	$stat['eneeded'] = ($stat['payout'])-($obj['data']['unpaid']/1000000000000000000) ;
 	$stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
 	$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
+	$stat['now'] = date("H:i:s", time());
 } else { $stat['waiting'] = 1; }
 
 ?>
