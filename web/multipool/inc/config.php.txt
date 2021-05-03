@@ -1,0 +1,70 @@
+<?php
+
+// -------------------------
+// --- REQUIRED SETTINGS ---
+// -------------------------
+
+// --- Encryption key for URLS ---
+// Used to mask links and other private data configured within miner stats
+// Set this to a random string of at least 20 charactersx
+	$conf['key'] = 'x';
+
+// --- Wallet/Account Address ---
+// Used to pull stats from ethermine, as well as the etherium blockchain
+// This is the same as "<Your_Ethereum_Address>" when configuring your miner
+	$conf['wallet'] = 'x';
+
+// --- Payout settings ---
+// Set the payout threshold here
+	$conf['payout_threshold'] = x;
+
+// --- Folder paths ---
+// Set the JS and CSS folder path for the server here
+	$conf['css_folder_path'] = "/css/";
+	$conf['js_folder_path'] = "/js/";
+
+// --- minerstat access code ---
+// minerstat config access code and worker name
+	$conf['ms_access_key'] = 'x';
+	$conf['ms_worker_name'] = 'x';
+
+// --- Timezone ---
+// Set this to your timezone, so that "next eth" and other date/time related 
+// statistics are calculated so they are relevant to you.
+// To find your timezone see - http://php.net/manual/en/timezones.php
+	date_default_timezone_set('Europe/London'); 
+
+// --- Cache Files ---
+	$conf['ms_cache_file'] = 'ms_temp.tmp';
+	$conf['em_cache_file'] = 'em_temp.tmp';
+	$conf['spark_cache_file'] = 'spark_temp.tmp';
+	$conf['hive_cache_file'] = 'hive_temp.tmp';
+
+// --- Pools ---
+// Set pools here, possible options: spark, hive, ethermine
+	$conf['pools'] = array('spark', 'hive');
+	
+// -------------------------
+// --- OPTIONAL SETTINGS ---
+// -------------------------
+
+// Set the base FIAT currency (ISO 4217) you are interested in.  Currently 
+// I have only created support for USD, EUR and GBP.  If you want others 
+// adding let me know.
+	$conf['fiat'] = 'gbp';
+
+// Set the colour scheme of all elements using the bootstrap utility
+// standards (info = blue, success = green, warning = yellow, danger = red).
+	$conf['colour'] = 'success';
+
+// ----------------------
+// --- DEBUG SETTINGS ---
+// ----------------------
+
+// You can safely leave these settings as they are, unless you know what 
+// you are doing and need to change them for some reason.
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+// error_reporting(E_ALL);
+// ini_set('allow_url_fopen', 1);
+?>

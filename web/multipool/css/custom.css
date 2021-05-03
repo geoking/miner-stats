@@ -1,0 +1,93 @@
+/* CSS customisations and overrides */
+
+@import 'https://fonts.googleapis.com/css?family=Lato';
+
+body {
+	font-family: 'Lato', sans-serif;
+	font-size: 16px;
+	padding-top: 30px;
+	background-color: #222;
+}
+
+a {
+    color: #66ccff;
+    text-decoration: none;
+}
+
+.list-group-item {
+    background-color: #222;
+	color: #FFF;
+}
+
+#showHideButtonDiv {
+	padding-bottom: 30px;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+h1 {
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 40px;
+	padding-bottom: 15px;
+	color: #FFF;
+	font-weight: bold;
+}
+
+h2 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 27px;
+	padding-top: 0%;
+	margin-top: 0%;
+    padding-bottom: 15px;
+    color: #FFF;
+}
+
+h3 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 22px;
+	padding-top: 0%;
+	margin-top: 0%;
+    padding-bottom: 30px;
+    color: #FFF;
+}
+
+h4 {
+	text-transform: uppercase;
+	margin: 3px;
+	font-size: 18px;
+	color: #66ccff;
+}
+
+h5 {
+    text-align: center;
+    font-size: 14px;
+	padding-top: 0%;
+	margin-top: 0%;
+    padding-bottom: 15px;
+    color: #FFF;
+}
+
+.progress {
+	height: 40px;
+	margin: 1px;
+	background-color: #444;
+}
+.progress p {
+	font-size: 14px;
+	margin-top: 10px;
+	color: #000000;
+}
+
+.footer {
+	margin-top: 10px;
+	margin-bottom: 30px;
+	text-align: center;
+	font-size: 10px;
+}
+.footer a { color: #999; }
+
+.sym { color: #999; }
