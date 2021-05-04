@@ -141,6 +141,6 @@ if (in_array("spark", $conf['pools'])) {
 
 $tomorrow = strtotime('tomorrow');
 $now = strtotime('now');
-$stat['todayEstimated'] = (($stat['totalUnpaid'] - $stat['startOfDayUnpaid']) / (86400 - ($tomorrow - $now))) * 86400;
+$stat['todayEstimated'] = (($stat['startOfDayUnpaid']) / (86400 - ($tomorrow - $now))) * 86400;
 $stat['now'] = date("H:i:s", time());
 ?>

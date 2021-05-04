@@ -52,31 +52,6 @@
 		} ?>
 
 		<div class="col-md-4">
-			<?php if ($stat['hashrate'] == 0) { ?>
-				<h1 style="font-size: 48px;">NOT CURRENTLY MINING</h1>
-			<?php }
-			else { ?>
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://my.minerstat.com/worker/".$conf['ms_worker_name']?> target="_blank">Minerstat</a></h4></li>
-					<li class="list-group-item">Hashrate	<span class="pull-right"><?=number_format($stat['hashrate'],2)?> <?=$stat['hashrate_unit']?>/s @ <?=$stat['power']?>W</span></li>
-					<li class="list-group-item">Efficiency	<span class="pull-right"><?=$stat['accepted']?>/<?=$stat['rejected']?> (<?=number_format(100 - (($stat['rejected'] / $stat['accepted']) * 100), 2)?>%)</span></li>
-					<li class="list-group-item">Temperature	<span class="pull-right"><?=$stat['temp0']?>°C / <?=$stat['temp1']?>°C</span></li>
-					<li class="list-group-item">Fan Speed	<span class="pull-right"><?=$stat['fanspeed0']?>% / <?=$stat['fanspeed1']?>%</span></li>
-					<li class="list-group-item">Uptime	<span class="pull-right"><?=$stat['uptime']?></span></li>
-				</ul>
-			<?php } ?>
-		</div>
-
-		<div class="col-md-4">
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Earnings</h4></li>
-				<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['startOfDayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['startOfDayUnpaid']),2)?>)</span></li>
-				<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
-				<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
-			</ul>
-		</div>
-
-		<div class="col-md-4">
 			<ul class="list-group">
 				<li class="list-group-item"><h4><a href='https://uk.finance.yahoo.com/cryptocurrencies' target="_blank">Watchlist (1hr +/-%)</a><span class="pull-right"><a href="javascript:void(0)" role="button" onClick="fiatUsdSwitch()" id="fiatUsdButton">$</a></span></h4></li>
 				<div id="fiatDiv">
@@ -103,6 +78,31 @@
 					<?php if ( $zrxchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'USD')?> target="_blank">ZRX 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($zrxtofiat * $stat['usdrate'],2) ?></span> </li> <?php } 
 					else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'USD')?> target="_blank">ZRX	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($zrxtofiat * $stat['usdrate'],2) ?></span> </li> <?php } ?>
 				</div>
+			</ul>
+		</div>
+
+		<div class="col-md-4">
+			<?php if ($stat['hashrate'] == 0) { ?>
+				<h1 style="font-size: 48px;">NOT CURRENTLY MINING</h1>
+			<?php }
+			else { ?>
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://my.minerstat.com/worker/".$conf['ms_worker_name']?> target="_blank">Minerstat</a></h4></li>
+					<li class="list-group-item">Hashrate	<span class="pull-right"><?=number_format($stat['hashrate'],2)?> <?=$stat['hashrate_unit']?>/s @ <?=$stat['power']?>W</span></li>
+					<li class="list-group-item">Efficiency	<span class="pull-right"><?=$stat['accepted']?>/<?=$stat['rejected']?> (<?=number_format(100 - (($stat['rejected'] / $stat['accepted']) * 100), 2)?>%)</span></li>
+					<li class="list-group-item">Temperature	<span class="pull-right"><?=$stat['temp0']?>°C / <?=$stat['temp1']?>°C</span></li>
+					<li class="list-group-item">Fan Speed	<span class="pull-right"><?=$stat['fanspeed0']?>% / <?=$stat['fanspeed1']?>%</span></li>
+					<li class="list-group-item">Uptime	<span class="pull-right"><?=$stat['uptime']?></span></li>
+				</ul>
+			<?php } ?>
+		</div>
+
+		<div class="col-md-4">
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>Earnings</h4></li>
+				<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['startOfDayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['startOfDayUnpaid']),2)?>)</span></li>
+				<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
+				<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
 			</ul>
 		</div>
 	</div>
