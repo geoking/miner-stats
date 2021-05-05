@@ -190,7 +190,33 @@ $result = file_get_contents('currentStatsOld.tmp');
 $currentStatsOld = json_decode($result, true);
 $result = file_get_contents('currentStatsOldOld.tmp');
 $currentStatsOldOld = json_decode($result, true);
+$stat['unpaid'] = number_format((($obj['data']['unpaid']/10)/100000000000000000),5);
+$stat['currentStatsUnpaid'] = number_format((($currentStats['data']['unpaid']/10)/100000000000000000),5);
+$stat['currentStatsOldUnpaid'] = number_format((($currentStatsOld['data']['unpaid']/10)/100000000000000000),5);
+$stat['currentStatsOldOldUnpaid'] = number_format((($currentStatsOldOld['data']['unpaid']/10)/100000000000000000),5);
 
+if (($stat['unpaid'] - $stat['currentStatsUnpaid']) > 0) {
+	$stat['todayUnpaid'] = $stat['unpaid'] - $stat['currentStatsUnpaid'];
+}
+else {
+	$stat['todayUnpaid'] = $stat['unpaid'];
+}
+
+if (($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']) > 0) {
+	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'];
+}
+else {
+	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'];
+}
+
+if (($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']) > 0) {
+	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'];
+}
+else {
+	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'];
+}
+
+//minerstat stats
 $stat['uptime'] = $msobj['info']['uptime'];
 $stat['mseday'] = $msobj['revenue']['coin'];
 $stat['temp0'] = $msobj['hardware'][0]['temp'];
@@ -205,63 +231,18 @@ $stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
 
 $stat['usdrate'] = $msobj['revenue']['cprice'] / $ethtofiat;
 
-$stat['payout'] = $conf['payout_threshold'];
-$stat['emin'] = $obj['data']['coinsPerMin'];
-$stat['ehour'] = $stat['emin']*60;
-$stat['eday'] = $stat['ehour']*24;
+$tomorrow = strtotime('tomorrow');
+$now = strtotime('now');
+$stat['todayEstimated'] = ($stat['todayUnpaid'] / (86400 - ($tomorrow - $now))) * 86400;
+$stat['eday'] = $stat['todayEstimated'];
+$stat['emin'] = $stat['ehour']/60;
+$stat['ehour'] = $stat['eday']/24;
 $stat['eweek'] = $stat['eday']*7;
 $stat['emonth'] = ( $stat['eweek']*52 )/12;
 $stat['eyear'] = $stat['eweek']*52;
-
-if ( $stat['ehour'] != '0' ) { 
-
-	$stat['bmin'] = $obj['data']['btcPerMin'];
-	$stat['bhour'] = $stat['bmin']*60;
-	$stat['bday'] = $stat['bhour']*24;
-	$stat['bweek'] = $stat['bday']*7;
-	$stat['bmonth'] = ( $stat['bweek']*52 )/12;
-	$stat['byear'] = $stat['bweek']*52;
-
-	$stat['umin'] = ($obj['data']['usdPerMin']);
-	$stat['uhour'] = $stat['umin']*60;
-	$stat['uday'] = $stat['uhour']*24;
-	$stat['uweek'] = $stat['uday']*7;
-	$stat['umonth'] = ( $stat['uweek']*52 )/12;
-	$stat['uyear'] = $stat['uweek']*52;
-
-	$stat['unpaid'] = number_format((($obj['data']['unpaid']/10)/100000000000000000),5);
-	$stat['currentStatsUnpaid'] = number_format((($currentStats['data']['unpaid']/10)/100000000000000000),5);
-	$stat['currentStatsOldUnpaid'] = number_format((($currentStatsOld['data']['unpaid']/10)/100000000000000000),5);
-	$stat['currentStatsOldOldUnpaid'] = number_format((($currentStatsOldOld['data']['unpaid']/10)/100000000000000000),5);
-
-	if (($stat['unpaid'] - $stat['currentStatsUnpaid']) > 0) {
-		$stat['todayUnpaid'] = $stat['unpaid'] - $stat['currentStatsUnpaid'];
-	}
-	else {
-		$stat['todayUnpaid'] = $stat['unpaid'];
-	}
-
-	if (($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']) > 0) {
-		$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'];
-	}
-	else {
-		$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'];
-	}
-
-	if (($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']) > 0) {
-		$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'];
-	}
-	else {
-		$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'];
-	}
-
-	$tomorrow = strtotime('tomorrow');
-	$now = strtotime('now');
-	$stat['todayEstimated'] = ($stat['todayUnpaid'] / (86400 - ($tomorrow - $now))) * 86400;
-	$stat['eneeded'] = ($stat['payout'])-($obj['data']['unpaid']/1000000000000000000) ;
-	$stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
-	$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
-	$stat['now'] = date("H:i:s", time());
-} else { $stat['waiting'] = 1; }
+$stat['eneeded'] = ($conf['payout_threshold'])-($obj['data']['unpaid']/1000000000000000000) ;
+$stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
+$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
+$stat['now'] = date("H:i:s", time());
 
 ?>

@@ -74,7 +74,7 @@
 					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$stat['payout']?> (<?=$fiat['sym'].number_format(($ethtofiat / 20),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$conf['payout_threshold']?> (<?=$fiat['sym'].number_format(($ethtofiat / 20),2)?>)</span></li>
 					<li class="list-group-item">&Xi; Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['eneeded']),2)?>)</span></li>
 				</ul>
 			</div>
@@ -110,7 +110,7 @@
 			</div>
 		</div>
 		<div id="hideDiv" style="display: none;">
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>&Xi;TH (est avg)</h4></li>
 					<li class="list-group-item">Hour 	<span class="pull-right">&Xi;<?=number_format($stat['ehour'],5)?></span></li>
@@ -121,7 +121,7 @@
 				</ul>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-6">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><?=$fiat['code']?> (est avg)</h4></li>
 					<li class="list-group-item">Hour 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ehour']*$ethtofiat),2)?></span></li>
@@ -131,23 +131,12 @@
 					<li class="list-group-item">Year 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eyear']*$ethtofiat),2)?></span></li>
 				</ul>
 			</div>
-
-			<div class="col-md-4">
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>฿TC (est avg)</h4></li>
-					<li class="list-group-item">Hour 	<span class="pull-right">฿<?=number_format($stat['bhour'],5)?></span></li>
-					<li class="list-group-item">Day 	<span class="pull-right">฿<?=number_format($stat['bday'],5)?></span></li>
-					<li class="list-group-item">Week 	<span class="pull-right">฿<?=number_format($stat['bweek'],5)?></span></li>
-					<li class="list-group-item">Month 	<span class="pull-right">฿<?=number_format($stat['bmonth'],5)?></span></li>
-					<li class="list-group-item">Year 	<span class="pull-right">฿<?=number_format($stat['byear'],5)?></span></li>
-				</ul>
-			</div>
 		</div>
 
 		<div class="col-md-12">
 			<div class="progress">
-			  	<div class="progress-bar progress-bar-striped progress-bar-<?=$conf['colour']?> active" role="progressbar" aria-valuenow="<?=$stat['unpaid']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=number_format(($stat['unpaid']/$stat['payout'])*100)?>%">
-			  		<p><?=number_format(($stat['unpaid']/$stat['payout'])*100)?>%</p>
+			  	<div class="progress-bar progress-bar-striped progress-bar-<?=$conf['colour']?> active" role="progressbar" aria-valuenow="<?=$stat['unpaid']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=number_format(($stat['unpaid']/$conf['payout_threshold'])*100)?>%">
+			  		<p><?=number_format(($stat['unpaid']/$conf['payout_threshold'])*100)?>%</p>
 				</div>
 			</div><br>
 		</div>
