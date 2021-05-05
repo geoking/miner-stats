@@ -108,10 +108,10 @@ $obj = json_decode($result, true);
 // creates a local cache file, in the event that the ethermine api limit is reached
 if ( is_null($obj) ) {
 	$cache = '1';
-	$result = file_get_contents($conf['cache_file']);
+	$result = file_get_contents($conf['em_cache_file']);
 	$obj = json_decode($result, true);
 } else {
-	$cache = fopen($conf['cache_file'], 'w');
+	$cache = fopen($conf['em_cache_file'], 'w');
 	fwrite($cache, $result);
 	$cache = '0';
 }
@@ -125,8 +125,20 @@ curl_setopt($ch, CURLOPT_URL, 'https://api.minerstat.com/v2/stats/'.$conf['ms_ac
 $result = curl_exec($ch);
 curl_close($ch);
 $msobj = json_decode($result, true);
-$msobj = reset($msobj);
 
+// creates a local cache file, in the event that the minerstat api limit is reached
+if ( is_null($msobj) ) {
+	$cache = '1';
+	$result = file_get_contents($conf['ms_cache_file']);
+	$msobj = json_decode($result, true);
+} else {
+	$cache = fopen($conf['ms_cache_file'], 'w');
+	fwrite($cache, $result);
+	$cache = '0';
+}
+
+//reset to move array up one
+$msobj = reset($msobj);
 
 // gets crypto exchange rate for ETH using cryptonator.com/api
 $ch = curl_init();
@@ -184,11 +196,11 @@ $zrxfi = json_decode($result, true);
 $zrxtofiat = $zrxfi['ticker']['price'];
 $zrxchange = $zrxfi['ticker']['change'];
 
-$result = file_get_contents('currentStats.tmp');
+$result = file_get_contents('tmp/currentStats.tmp');
 $currentStats = json_decode($result, true);
-$result = file_get_contents('currentStatsOld.tmp');
+$result = file_get_contents('tmp/currentStatsOld.tmp');
 $currentStatsOld = json_decode($result, true);
-$result = file_get_contents('currentStatsOldOld.tmp');
+$result = file_get_contents('tmp/currentStatsOldOld.tmp');
 $currentStatsOldOld = json_decode($result, true);
 $stat['unpaid'] = number_format((($obj['data']['unpaid']/10)/100000000000000000),5);
 $stat['currentStatsUnpaid'] = number_format((($currentStats['data']['unpaid']/10)/100000000000000000),5);
@@ -231,6 +243,7 @@ $stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
 
 $stat['usdrate'] = $msobj['revenue']['cprice'] / $ethtofiat;
 
+//ether stats
 $tomorrow = strtotime('tomorrow');
 $now = strtotime('now');
 $stat['todayEstimated'] = ($stat['todayUnpaid'] / (86400 - ($tomorrow - $now))) * 86400;
@@ -240,7 +253,7 @@ $stat['ehour'] = $stat['eday']/24;
 $stat['eweek'] = $stat['eday']*7;
 $stat['emonth'] = ( $stat['eweek']*52 )/12;
 $stat['eyear'] = $stat['eweek']*52;
-$stat['eneeded'] = ($conf['payout_threshold'])-($obj['data']['unpaid']/1000000000000000000) ;
+$stat['eneeded'] = ($conf['payout_threshold'])-($obj['data']['unpaid']/1000000000000000000);
 $stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
 $stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
 $stat['now'] = date("H:i:s", time());

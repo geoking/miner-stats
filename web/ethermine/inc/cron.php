@@ -8,9 +8,9 @@ $result = curl_exec($ch);
 curl_close($ch);
 $obj = json_decode($result, true);
 
-$currentStatsDest = 'domains/gking.uk/public_html/stats/currentStats.tmp';
-$currentStatsOldDest = 'domains/gking.uk/public_html/stats/currentStatsOld.tmp';
-$currentStatsOldOldDest = 'domains/gking.uk/public_html/stats/currentStatsOldOld.tmp';
+$currentStatsDest = 'domains/gking.uk/public_html/stats/tmp/currentStats.tmp';
+$currentStatsOldDest = 'domains/gking.uk/public_html/stats/tmp/currentStatsOld.tmp';
+$currentStatsOldOldDest = 'domains/gking.uk/public_html/stats/tmp/currentStatsOldOld.tmp';
 
 copy($currentStatsOldDest, $currentStatsOldOldDest);
 copy($currentStatsDest, $currentStatsOldDest);
