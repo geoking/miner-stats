@@ -81,7 +81,7 @@
 
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item"><h4><a href='https://uk.finance.yahoo.com/cryptocurrencies' target="_blank">Watchlist (1hr +/-%)</a><span class="pull-right"><a href="javascript:void(0)" role="button" onClick="fiatUsdSwitch()" id="fiatUsdButton">$</a></span></h4></li>
+					<li class="list-group-item"><h4><a href='https://uk.finance.yahoo.com/cryptocurrencies' target="_blank">Watchlist (1hr +/-%)</a><span class="pull-right"><a href="javascript:void(0)" role="button" onClick="fiatUsdSwitch()" id="fiatUsdButton">£<span style="font-size: 10px;">/$</span></a></span></h4></li>
 					<div id="fiatDiv">
 					<?php if ( $btcgbpchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', 'GBP')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $btcgbpchange ?>%)</span><span class="pull-right">£<?= number_format($btctogbp, 2) ?></span> </li> <?php }
 						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', 'GBP')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: red">&nbsp;(<?= $btcgbpchange ?>%)</span><span class="pull-right">£<?= number_format($btctogbp, 2) ?></span> </li> <?php } ?>

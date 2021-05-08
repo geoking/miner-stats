@@ -20,11 +20,11 @@ function fiatUsdSwitch() {
     if (x.style.display === "none") {
         x.style.display = "block";
         y.style.display = "none";
-        b.innerText = "$";
+        b.innerHTML = '£<span style="font-size: 10px;">/$';
     } else {
         x.style.display = "none";
         y.style.display = "block";
-        b.innerText = "£";
+        b.innerHTML = '$<span style="font-size: 10px;">/£';
     }
 }
 
