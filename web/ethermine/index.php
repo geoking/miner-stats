@@ -80,6 +80,10 @@
 			</div>
 
 			<div class="col-md-4">
+				<?php if ($ethtofiat == 0) { ?>
+					<h1 style="font-size: 48px;">WATCHLIST UNAVAILABLE (API FAILURE)</h1>
+				<?php }
+				else { ?>
 				<ul class="list-group">
 					<li class="list-group-item"><h4><a href='https://uk.finance.yahoo.com/cryptocurrencies' target="_blank">Watchlist (1hr +/-%)</a><span class="pull-right"><a href="javascript:void(0)" role="button" onClick="fiatUsdSwitch()" id="fiatUsdButton">$</a></span></h4></li>
 					<div id="fiatDiv">
@@ -107,6 +111,7 @@
 						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'USD')?> target="_blank">ZRX	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($zrxtofiat * $stat['usdrate'],2) ?></span> </li> <?php } ?>
 					</div>
 				</ul>
+				<?php } ?>
 			</div>
 		</div>
 		<div id="hideDiv" style="display: none;">
