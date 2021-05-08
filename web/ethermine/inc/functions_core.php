@@ -1,5 +1,4 @@
 <?php
-
 // Core functions file
 
 function core_output_footerscripts() {
@@ -140,84 +139,6 @@ if ( is_null($msobj) ) {
 //reset to move array up one
 $msobj = reset($msobj);
 
-// gets crypto exchange rate for ETH using coinbase.com/api
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_URL, 'https://api.coinbase.com/v2/prices/eth-'.strtolower($conf['fiat']).'/spot');
-$result = curl_exec($ch);
-curl_close($ch);
-$efi = json_decode($result, true);
-$ethtofiat = $efi['data']['amount'];
-
-// gets crypto exchange rate for ETH using cryptonator.com/api
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-curl_setopt($ch, CURLOPT_URL, 'https://api.cryptonator.com/api/ticker/eth-'.strtolower($conf['fiat']));
-$result = curl_exec($ch);
-curl_close($ch);
-$efi = json_decode($result, true);
-$ethchange = $efi['ticker']['change'];
-
-//if cryptonator api is working
-if ($ethtofiat != 0) {
-
-	// gets crypto exchange rate for BTC using cryptonator.com/api
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-	curl_setopt($ch, CURLOPT_URL, 'https://api.cryptonator.com/api/ticker/btc-'.strtolower($conf['fiat']));
-	$result = curl_exec($ch);
-	curl_close($ch);
-	$bfi = json_decode($result, true);
-	$btctofiat = $bfi['ticker']['price'];
-	$btcchange = $bfi['ticker']['change'];
-
-	// gets crypto exchange rate for BAT using cryptonator.com/api
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-	curl_setopt($ch, CURLOPT_URL, 'https://api.cryptonator.com/api/ticker/bat-'.strtolower($conf['fiat']));
-	$result = curl_exec($ch);
-	curl_close($ch);
-	$batfi = json_decode($result, true);
-	$battofiat = $batfi['ticker']['price'];
-	$batchange = $batfi['ticker']['change'];
-
-	// gets crypto exchange rate for DOGE using cryptonator.com/api
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-	curl_setopt($ch, CURLOPT_URL, 'https://api.cryptonator.com/api/ticker/doge-'.strtolower($conf['fiat']));
-	$result = curl_exec($ch);
-	curl_close($ch);
-	$dogefi = json_decode($result, true);
-	$dogetofiat = $dogefi['ticker']['price'];
-	$dogechange = $dogefi['ticker']['change'];
-
-	// gets crypto exchange rate for ZRX using cryptonator.com/api
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-	curl_setopt($ch, CURLOPT_URL, 'https://api.cryptonator.com/api/ticker/zrx-'.strtolower($conf['fiat']));
-	$result = curl_exec($ch);
-	curl_close($ch);
-	$zrxfi = json_decode($result, true);
-	$zrxtofiat = $zrxfi['ticker']['price'];
-	$zrxchange = $zrxfi['ticker']['change'];
-}
-
 $result = file_get_contents('tmp/currentStats.tmp');
 $currentStats = json_decode($result, true);
 $result = file_get_contents('tmp/currentStatsOld.tmp');
@@ -262,8 +183,6 @@ $stat['hashrate_unit'] = $msobj['mining']['hashrate']['hashrate_unit'];
 $stat['power'] = $msobj['hardware'][0]['power'] + $msobj['hardware'][1]['power'];
 $stat['accepted'] = $msobj['mining']['shares']['accepted_share'];
 $stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
-
-$stat['usdrate'] = $msobj['revenue']['cprice'] / $ethtofiat;
 
 //ether stats
 $tomorrow = strtotime('tomorrow');

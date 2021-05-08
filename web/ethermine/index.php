@@ -12,7 +12,7 @@
 	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
-	<title>(<?=$fiat['sym'].number_format(($stat['todayEstimated']*$ethtofiat),2)?>) GK &Xi; STATS</title>
+	<title>(<?=$fiat['sym'].number_format(($stat['todayEstimated']*$ethtogbp),2)?>) GK &Xi; STATS</title>
 	<meta http-equiv="Refresh" content="120">
   </head>
 
@@ -30,16 +30,16 @@
 			<?php if ($stat['hashrate'] == 0) { ?>
 				<h3>NOT MINING! :(</h3>
 			<?php } else { ?>
-				<h3>&Xi;<?=number_format($stat['mseday'],5)?> (<?=$fiat['sym'].number_format(($stat['mseday']*$ethtofiat),2)?>)</h3>
+				<h3>&Xi;<?=number_format($stat['mseday'],5)?> (<?=$fiat['sym'].number_format(($stat['mseday']*$ethtogbp),2)?>)</h3>
 			<?php } ?>
 		</div>
 		<div class="col-md-3">
 			<h2>EST TODAY</h2>
-			<h3>&Xi;<?=number_format($stat['todayEstimated'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayEstimated']),2)?>)</h3>
+			<h3>&Xi;<?=number_format($stat['todayEstimated'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['todayEstimated']),2)?>)</h3>
 		</div>
 		<div class="col-md-3">
 			<h2>UNPAID</h2>
-			<h3>&Xi;<?=number_format($stat['unpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['unpaid']),2)?>)</h3>
+			<h3>&Xi;<?=number_format($stat['unpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['unpaid']),2)?>)</h3>
 		</div>
 		<div class="col-md-3">
 			<h2>EST PAYOUT</h2>
@@ -71,47 +71,42 @@
 			<div class="col-md-4">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://ethermine.org/miners/".$conf['wallet']."/dashboard"?> target="_blank">Earnings</a></h4></li>
-					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['todayUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['yesterdayUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$conf['payout_threshold']?> (<?=$fiat['sym'].number_format(($ethtofiat / 20),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtofiat * $stat['eneeded']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['todayUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['yesterdayUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$conf['payout_threshold']?> (<?=$fiat['sym'].number_format(($ethtogbp / 20),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['eneeded']),2)?>)</span></li>
 				</ul>
 			</div>
 
 			<div class="col-md-4">
-				<?php if ($ethtofiat == 0) { ?>
-					<h1 style="font-size: 48px;">WATCHLIST UNAVAILABLE (API FAILURE)</h1>
-				<?php }
-				else { ?>
 				<ul class="list-group">
 					<li class="list-group-item"><h4><a href='https://uk.finance.yahoo.com/cryptocurrencies' target="_blank">Watchlist (1hr +/-%)</a><span class="pull-right"><a href="javascript:void(0)" role="button" onClick="fiatUsdSwitch()" id="fiatUsdButton">$</a></span></h4></li>
 					<div id="fiatDiv">
-						<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', $conf['fiat'])?> target="_blank">฿TC 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php }
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', $conf['fiat'])?> target="_blank">฿TC 	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($btctofiat,2) ?></span> </li> <?php } ?>
-						<?php if ( $ethchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH', $conf['fiat'])?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php }
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH', $conf['fiat'])?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($ethtofiat,2) ?></span> </li> <?php } ?>
-						<?php if ( $batchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BAT', $conf['fiat'])?> target="_blank">BAT 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($battofiat - $batchange) / $battofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($battofiat,2) ?></span> </li> <?php } 
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BAT', $conf['fiat'])?> target="_blank">BAT	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($battofiat - $batchange) / $battofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($battofiat,2) ?></span> </li> <?php } ?>
-						<?php if ( $dogechange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('DOGE', $conf['fiat'])?> target="_blank">DOGE 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($dogetofiat - $dogechange) / $dogetofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($dogetofiat,3) ?></span> </li> <?php } 
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('DOGE', $conf['fiat'])?> target="_blank">DOGE	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($dogetofiat - $dogechange) / $dogetofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($dogetofiat,3) ?></span> </li> <?php } ?>
-						<?php if ( $zrxchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', $conf['fiat'])?> target="_blank">ZRX 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($zrxtofiat,2) ?></span> </li> <?php } 
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', $conf['fiat'])?> target="_blank">ZRX	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right"><?=$fiat['sym'].number_format($zrxtofiat,2) ?></span> </li> <?php } ?>
+					<?php if ( $btcgbpchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', 'GBP')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $btcgbpchange ?>%)</span><span class="pull-right">£<?= number_format($btctogbp, 2) ?></span> </li> <?php }
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', 'GBP')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: red">&nbsp;(<?= $btcgbpchange ?>%)</span><span class="pull-right">£<?= number_format($btctogbp, 2) ?></span> </li> <?php } ?>
+						<?php if ( $ethgbpchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH', 'GBP')?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $ethgbpchange ?>%)</span><span class="pull-right">£<?= number_format($ethtogbp, 2) ?></span> </li> <?php }
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH', 'GBP')?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: red">&nbsp;(<?= $ethgbpchange ?>%)</span><span class="pull-right">£<?= number_format($ethtogbp, 2) ?></span> </li> <?php } ?>
+						<?php if ( $batgbpchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BAT', 'GBP')?> target="_blank">BAT 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $batgbpchange ?>%)</span><span class="pull-right">£<?= number_format($battogbp, 3) ?></span> </li> <?php } 
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BAT', 'GBP')?> target="_blank">BAT	</a><span class="pull-right" style="color: red">&nbsp;(<?= $batgbpchange ?>%)</span><span class="pull-right">£<?= number_format($battogbp, 3) ?></span> </li> <?php } ?>
+						<?php if ( $dogegbpchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('DOGE', 'GBP')?> target="_blank">DOGE 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $dogegbpchange ?>%)</span><span class="pull-right">£<?= number_format($dogetogbp, 3) ?></span> </li> <?php } 
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('DOGE', 'GBP')?> target="_blank">DOGE	</a><span class="pull-right" style="color: red">&nbsp;(<?= $dogegbpchange ?>%)</span><span class="pull-right">£<?= number_format($dogetogbp, 3) ?></span> </li> <?php } ?>
+						<?php if ( $zrxgbpchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'GBP')?> target="_blank">ZRX 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $zrxgbpchange ?>%)</span><span class="pull-right">£<?= number_format($zrxtogbp, 3) ?></span> </li> <?php } 
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'GBP')?> target="_blank">ZRX	</a><span class="pull-right" style="color: red">&nbsp;(<?= $zrxgbpchange ?>%)</span><span class="pull-right">£<?= number_format($zrxtogbp, 3) ?></span> </li> <?php } ?>
 					</div>
 					<div id="usdDiv" style="display: none;">
-						<?php if ( $btcchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', 'USD')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($btctofiat * $stat['usdrate'],2) ?></span> </li> <?php }
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', 'USD')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($btctofiat - $btcchange) / $btctofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($btctofiat * $stat['usdrate'],2) ?></span> </li> <?php } ?>
-						<?php if ( $ethchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH', 'USD')?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($ethtofiat * $stat['usdrate'],2) ?></span> </li> <?php }
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH', 'USD')?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($ethtofiat - $ethchange) / $ethtofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($ethtofiat * $stat['usdrate'],2) ?></span> </li> <?php } ?>
-						<?php if ( $batchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BAT', 'USD')?> target="_blank">BAT 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($battofiat - $batchange) / $battofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($battofiat * $stat['usdrate'],2) ?></span> </li> <?php } 
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BAT', 'USD')?> target="_blank">BAT	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($battofiat - $batchange) / $battofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($battofiat * $stat['usdrate'],2) ?></span> </li> <?php } ?>
-						<?php if ( $dogechange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('DOGE', 'USD')?> target="_blank">DOGE 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($dogetofiat - $dogechange) / $dogetofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($dogetofiat * $stat['usdrate'],3) ?></span> </li> <?php } 
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('DOGE', 'USD')?> target="_blank">DOGE	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($dogetofiat - $dogechange) / $dogetofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($dogetofiat * $stat['usdrate'],3) ?></span> </li> <?php } ?>
-						<?php if ( $zrxchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'USD')?> target="_blank">ZRX 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($zrxtofiat * $stat['usdrate'],2) ?></span> </li> <?php } 
-						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'USD')?> target="_blank">ZRX	</a><span class="pull-right" style="color: red">&nbsp;(<?=number_format(((1 - ($zrxtofiat - $zrxchange) / $zrxtofiat) * 100),2)?>%)</span><span class="pull-right">$<?=number_format($zrxtofiat * $stat['usdrate'],2) ?></span> </li> <?php } ?>
+						<?php if ( $btcusdchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', 'USD')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $btcusdchange ?>%)</span><span class="pull-right">$<?= number_format($btctousd, 2) ?></span> </li> <?php }
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BTC', 'USD')?> target="_blank">฿TC 	</a><span class="pull-right" style="color: red">&nbsp;(<?= $btcusdchange ?>%)</span><span class="pull-right">$<?= number_format($btctousd, 2) ?></span> </li> <?php } ?>
+						<?php if ( $ethusdchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH', 'USD')?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $ethusdchange ?>%)</span><span class="pull-right">$<?= number_format($ethtousd, 2) ?></span> </li> <?php }
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ETH', 'USD')?> target="_blank">&Xi;TH 	</a><span class="pull-right" style="color: red">&nbsp;(<?= $ethusdchange ?>%)</span><span class="pull-right">$<?= number_format($ethtousd, 2) ?></span> </li> <?php } ?>
+						<?php if ( $batusdchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BAT', 'USD')?> target="_blank">BAT 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $batusdchange ?>%)</span><span class="pull-right">$<?= number_format($battousd, 3) ?></span> </li> <?php } 
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('BAT', 'USD')?> target="_blank">BAT	</a><span class="pull-right" style="color: red">&nbsp;(<?= $batusdchange ?>%)</span><span class="pull-right">$<?= number_format($battousd, 3) ?></span> </li> <?php } ?>
+						<?php if ( $dogeusdchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('DOGE', 'USD')?> target="_blank">DOGE 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $dogeusdchange ?>%)</span><span class="pull-right">$<?= number_format($dogetousd, 3) ?></span> </li> <?php } 
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('DOGE', 'USD')?> target="_blank">DOGE	</a><span class="pull-right" style="color: red">&nbsp;(<?= $dogeusdchange ?>%)</span><span class="pull-right">$<?= number_format($dogetousd, 3) ?></span> </li> <?php } ?>
+						<?php if ( $zrxusdchange >= '0' ) { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'USD')?> target="_blank">ZRX 	</a><span class="pull-right" style="color: lightgreen">&nbsp;(+<?= $zrxusdchange ?>%)</span><span class="pull-right">$<?= number_format($zrxtousd, 3) ?></span> </li> <?php } 
+						else { ?><li class="list-group-item"><a href=<?=core_getcryptourl('ZRX', 'USD')?> target="_blank">ZRX	</a><span class="pull-right" style="color: red">&nbsp;(<?= $zrxusdchange ?>%)</span><span class="pull-right">$<?= number_format($zrxtousd, 3) ?></span> </li> <?php } ?>
 					</div>
 				</ul>
-				<?php } ?>
 			</div>
 		</div>
 		<div id="hideDiv" style="display: none;">
@@ -129,11 +124,11 @@
 			<div class="col-md-6">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><?=$fiat['code']?> (est avg)</h4></li>
-					<li class="list-group-item">Hour 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ehour']*$ethtofiat),2)?></span></li>
-					<li class="list-group-item">Day 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eday']*$ethtofiat),2)?></span></li>
-					<li class="list-group-item">Week 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eweek']*$ethtofiat),2)?></span></li>
-					<li class="list-group-item">Month 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['emonth']*$ethtofiat),2)?></span></li>
-					<li class="list-group-item">Year 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eyear']*$ethtofiat),2)?></span></li>
+					<li class="list-group-item">Hour 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ehour']*$ethtogbp),2)?></span></li>
+					<li class="list-group-item">Day 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eday']*$ethtogbp),2)?></span></li>
+					<li class="list-group-item">Week 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eweek']*$ethtogbp),2)?></span></li>
+					<li class="list-group-item">Month 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['emonth']*$ethtogbp),2)?></span></li>
+					<li class="list-group-item">Year 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eyear']*$ethtogbp),2)?></span></li>
 				</ul>
 			</div>
 		</div>
