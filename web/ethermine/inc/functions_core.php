@@ -172,7 +172,7 @@ else {
 }
 
 //minerstat stats
-$stat['uptime'] = $msobj['info']['uptime'];
+$stat['uptime'] = $msobj['info']['os']['uptime'];
 $stat['mseday'] = $msobj['revenue']['coin'];
 $stat['temp0'] = $msobj['hardware'][0]['temp'];
 $stat['fanspeed0'] = $msobj['hardware'][0]['fan'];
