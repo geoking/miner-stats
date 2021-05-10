@@ -51,7 +51,7 @@
 			die;
 		} ?>
 
-		<div id="showDiv">
+		<div id="overallStatsDiv">
 			<div class="col-md-4">
 				<?php if ($stat['hashrate'] == 0) { ?>
 					<h1 style="font-size: 48px;">NOT CURRENTLY MINING</h1>
@@ -80,7 +80,7 @@
 			</div>
 		</div>
 
-		<div id="hideDiv" style="display: none;">
+		<div id="averageStatsDiv" style="display: none;">
 			<div class="col-md-4">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>&Xi;TH (est avg)</h4></li>
@@ -100,6 +100,30 @@
 					<li class="list-group-item">Week 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eweek']*$ethtogbp),2)?></span></li>
 					<li class="list-group-item">Month 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['emonth']*$ethtogbp),2)?></span></li>
 					<li class="list-group-item">Year 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['eyear']*$ethtogbp),2)?></span></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="currentStatsDiv" style="display: none;">
+			<div class="col-md-4">
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4>&Xi;TH (current)</h4></li>
+					<li class="list-group-item">Hour 	<span class="pull-right">&Xi;<?=number_format($stat['ecurhour'],5)?></span></li>
+					<li class="list-group-item">Day 	<span class="pull-right">&Xi;<?=number_format($stat['ecurday'],5)?></span></li>
+					<li class="list-group-item">Week 	<span class="pull-right">&Xi;<?=number_format($stat['ecurweek'],5)?></span></li>
+					<li class="list-group-item">Month 	<span class="pull-right">&Xi;<?=number_format($stat['ecurmonth'],5)?></span></li>
+					<li class="list-group-item">Year 	<span class="pull-right">&Xi;<?=number_format($stat['ecuryear'],5)?></span></li>
+				</ul>
+			</div>
+
+			<div class="col-md-4">
+				<ul class="list-group">
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><?=$fiat['code']?> (current)</h4></li>
+					<li class="list-group-item">Hour 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ecurhour']*$ethtogbp),2)?></span></li>
+					<li class="list-group-item">Day 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ecurday']*$ethtogbp),2)?></span></li>
+					<li class="list-group-item">Week 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ecurweek']*$ethtogbp),2)?></span></li>
+					<li class="list-group-item">Month 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ecurmonth']*$ethtogbp),2)?></span></li>
+					<li class="list-group-item">Year 	<span class="pull-right"><?=$fiat['sym'].number_format(($stat['ecuryear']*$ethtogbp),2)?></span></li>
 				</ul>
 			</div>
 		</div>

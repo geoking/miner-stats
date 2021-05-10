@@ -1,14 +1,22 @@
 function showHide() {
-    var x = document.getElementById("showDiv");
-    var y = document.getElementById("hideDiv");
+    var x = document.getElementById("overallStatsDiv");
+    var y = document.getElementById("averageStatsDiv");
+    var z = document.getElementById("currentStatsDiv");
     var b = document.getElementById("showHideButton");
-    if (x.style.display === "none") {
+    if (b.innerText === "Show overall stats") {
         x.style.display = "block";
         y.style.display = "none";
+        z.style.display = "none";
         b.innerText = "Show average rates";
-    } else {
+    } else if (b.innerText === "Show average rates") {
         x.style.display = "none";
         y.style.display = "block";
+        z.style.display = "none";
+        b.innerText = "Show current rates";
+    } else if (b.innerText === "Show current rates") {
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "block";
         b.innerText = "Show overall stats";
     }
 }
