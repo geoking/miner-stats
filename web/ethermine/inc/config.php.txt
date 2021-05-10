@@ -17,32 +17,30 @@
 
 // --- Payout settings ---
 // Set the payout threshold here
-	$conf['payout_threshold'] = 0.05;
+	$conf['payout_threshold'] = x;
 
-// --- CSS Folder path ---
-// Set the CSS folder path for the server here
+// --- Folder paths ---
+// Set the JS and CSS folder path for the server here
 	$conf['css_folder_path'] = "/css/custom.css";
 	$conf['js_folder_path'] = "/js/";
 
 // --- minerstat access code ---
 // minerstat config access code and worker name
 	$conf['ms_access_key'] = 'x';
-	$conf['ms_worker_name'] = 'worker1';
+	$conf['ms_worker_name'] = 'x';
+
+// --- Cache Files ---
+	$conf['ms_cache_file'] = 'ms_temp.tmp';
+	$conf['em_cache_file'] = 'em_temp.tmp';
+
+// --- Watchlist ---
+	$conf['watchlist'] = array('ETH','BTC','BAT','DOGE','ZRX');
 
 // --- Timezone ---
 // Set this to your timezone, so that "next eth" and other date/time related 
 // statistics are calculated so they are relevant to you.
 // To find your timezone see - http://php.net/manual/en/timezones.php
 	date_default_timezone_set('Europe/London'); 
-
-// --- Cache File ---
-// In the event that the Ethermine API returns no data, a local cache file
-// is created and used.  No data is returned from the API query when there
-// are too many requests being made.  Specify what you'd like your cache 
-// file to be called.  This file will be readable from your webserver, so
-// use a random name to maintain the obscurity of your mining wallet 
-// address.
-	$conf['cache_file'] = 'changeme.tmp';
 	
 // -------------------------
 // --- OPTIONAL SETTINGS ---
