@@ -35,7 +35,7 @@ function core_dec($fin) {
 
 function core_calc_remaining($fin) {
 
-	if ($stat['paytime'] < date('now')) {
+	if (strtotime($stat['paytime']) < time()) {
 		return 'PROCESSING';
 	}
 
@@ -98,7 +98,7 @@ elseif ( strtoupper($conf['fiat']) == 'GBP' ) { $fiat = array( 'code' => 'GBP', 
 elseif ( strtoupper($conf['fiat']) == 'EUR' ) { $fiat = array( 'code' => 'EUR', 'sym' => '&euro;' ); }
 
 
-// get stats from ethermine
+// get current stats from ethermine
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -116,6 +116,28 @@ if ( is_null($obj) ) {
 	$obj = json_decode($result, true);
 } else {
 	$cache = fopen($conf['em_cache_file'], 'w');
+	fwrite($cache, $result);
+	$cache = '0';
+}
+
+// get payout stats from ethermine
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_TIMEOUT, 4);
+curl_setopt($ch, CURLOPT_URL, 'https://api.ethermine.org/miner/'.$conf['wallet'].'/payouts');
+$result = curl_exec($ch);
+curl_close($ch);
+$pobj = json_decode($result, true);
+
+
+// creates a local cache file, in the event that the ethermine api limit is reached
+if ( is_null($pobj) ) {
+	$cache = '1';
+	$result = file_get_contents($conf['po_cache_file']);
+	$pobj = json_decode($result, true);
+} else {
+	$cache = fopen($conf['po_cache_file'], 'w');
 	fwrite($cache, $result);
 	$cache = '0';
 }
@@ -203,9 +225,22 @@ $stat['ecurhour'] = $stat['ecurday']/24;
 $stat['ecurweek'] = $stat['ecurday']*7;
 $stat['ecurmonth'] = ( $stat['ecurweek']*52 )/12;
 $stat['ecuryear'] = $stat['ecurweek']*52;
+$stat['lastpaid'] = $pobj['data'][0]['paidOn'];
+$stat['lastpaidplussevendays'] = $stat['lastpaid']+604800;
 $stat['eneeded'] = $conf['payout_threshold']-$stat['unpaid'];
 $stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
-$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
+if (!($stat['hoursuntil'] > 0)) {
+	$stat['paytime'] = date("D d M, H:i:s", time());
+} else {
+	$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
+}
+
+if (strtotime($stat['paytime']) < $stat['lastpaidplussevendays']) {
+	$stat['hoursuntil'] = ($stat['lastpaidplussevendays'] - time()) / 3600;
+	$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
+	$stat['eneeded'] = $stat['hoursuntil'] * $stat['ehour'];
+	$conf['payout_threshold'] = $stat['unpaid'] + $stat['eneeded'];
+}
 $stat['now'] = date("H:i:s", time());
 
 ?>

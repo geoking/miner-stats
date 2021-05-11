@@ -32,6 +32,7 @@
 // --- Cache Files ---
 	$conf['ms_cache_file'] = 'ms_temp.tmp';
 	$conf['em_cache_file'] = 'em_temp.tmp';
+	$conf['po_cache_file'] = 'po_temp.tmp';
 
 // --- Watchlist ---
 	$conf['watchlist'] = array('ETH','BTC','BAT','DOGE','ZRX');
