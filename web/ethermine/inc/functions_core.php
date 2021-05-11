@@ -34,6 +34,11 @@ function core_dec($fin) {
 }
 
 function core_calc_remaining($fin) {
+
+	if ($stat['paytime'] < date('now')) {
+		return 'PROCESSING';
+	}
+
 	$days = (gmdate('j', floor($fin * 3600)))-1;
 	$hours = gmdate('G', floor($fin * 3600));
 	if ($days == 0) { $minutes = gmdate('i', floor($fin * 3600)); }
@@ -198,7 +203,7 @@ $stat['ecurhour'] = $stat['ecurday']/24;
 $stat['ecurweek'] = $stat['ecurday']*7;
 $stat['ecurmonth'] = ( $stat['ecurweek']*52 )/12;
 $stat['ecuryear'] = $stat['ecurweek']*52;
-$stat['eneeded'] = ($conf['payout_threshold'])-($obj['data']['unpaid']/1000000000000000000);
+$stat['eneeded'] = $conf['payout_threshold']-$stat['unpaid'];
 $stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
 $stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
 $stat['now'] = date("H:i:s", time());
