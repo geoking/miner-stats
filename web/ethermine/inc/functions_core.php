@@ -36,7 +36,7 @@ function core_dec($fin) {
 function core_calc_remaining($fin) {
 
 	date_default_timezone_set('UTC');
-	if (strtotime($stat['paytime']) < time()) {
+	if ($fin < 0) {
 		return 'PROCESSING';
 	}
 
@@ -230,7 +230,8 @@ $stat['ecurmonth'] = ( $stat['ecurweek']*52 )/12;
 $stat['ecuryear'] = $stat['ecurweek']*52;
 $stat['lastpaid'] = $pobj['data'][0]['paidOn'];
 $stat['lastpaidplussevendays'] = $stat['lastpaid']+604800;
-$stat['eneeded'] = $conf['payout_threshold']-$stat['unpaid'];
+$stat['payout_threshold'] = 0.05;
+$stat['eneeded'] = $stat['payout_threshold']-$stat['unpaid'];
 $stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
 if (!($stat['hoursuntil'] > 0)) {
 	$stat['paytime'] = date("D d M, H:i:s", time());
@@ -242,7 +243,14 @@ if (strtotime($stat['paytime']) < $stat['lastpaidplussevendays']) {
 	$stat['hoursuntil'] = ($stat['lastpaidplussevendays'] - time()) / 3600;
 	$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
 	$stat['eneeded'] = $stat['hoursuntil'] * $stat['ehour'];
-	$conf['payout_threshold'] = $stat['unpaid'] + $stat['eneeded'];
+	$stat['payout_threshold'] = $stat['unpaid'] + $stat['eneeded'];
+}
+
+if ($stat['payout_threshold'] > 0.1) {
+	$stat['payout_threshold'] = $conf['payout_threshold'];
+	$stat['eneeded'] = $stat['payout_threshold']-$stat['unpaid'];
+	$stat['hoursuntil'] = $stat['eneeded'] / $stat['ehour'];
+	$stat['paytime'] = date("D d M, H:i:s", time() + ($stat['hoursuntil'] * 3600) );
 }
 
 ?>

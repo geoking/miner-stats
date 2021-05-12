@@ -71,11 +71,11 @@
 			<div class="col-md-4">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://ethermine.org/miners/".$conf['wallet']."/dashboard"?> target="_blank">Earnings</a></h4></li>
-					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['todayUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['yesterdayUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=$conf['payout_threshold']?> (<?=$fiat['sym'].number_format(($ethtogbp / 20),2)?>)</span></li>
-					<li class="list-group-item">&Xi; Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],5)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['eneeded']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],4)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['todayUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],4)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['yesterdayUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],4)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Payout Figure		<span class="pull-right">&Xi;<?=number_format($stat['payout_threshold'], 4)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['payout_threshold']),2)?>)</span></li>
+					<li class="list-group-item">&Xi; Remaining 	<span class="pull-right">&Xi;<?=number_format($stat['eneeded'],4)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['eneeded']),2)?>)</span></li>
 				</ul>
 			</div>
 		</div>
@@ -149,8 +149,8 @@
 
 		<div class="col-md-12">
 			<div class="progress">
-			  	<div class="progress-bar progress-bar-striped progress-bar-<?=$conf['colour']?> active" role="progressbar" aria-valuenow="<?=$stat['unpaid']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=number_format(($stat['unpaid']/$conf['payout_threshold'])*100)?>%">
-			  		<p><?=number_format(($stat['unpaid']/$conf['payout_threshold'])*100)?>%</p>
+			  	<div class="progress-bar progress-bar-striped progress-bar-<?=$conf['colour']?> active" role="progressbar" aria-valuenow="<?=$stat['unpaid']?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=number_format(($stat['unpaid']/$stat['payout_threshold'])*100)?>%">
+			  		<p><?=number_format(($stat['unpaid']/$stat['payout_threshold'])*100)?>%</p>
 				</div>
 			</div><br>
 		</div>
