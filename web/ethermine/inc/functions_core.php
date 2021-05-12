@@ -35,6 +35,7 @@ function core_dec($fin) {
 
 function core_calc_remaining($fin) {
 
+	date_default_timezone_set('UTC');
 	if (strtotime($stat['paytime']) < time()) {
 		return 'PROCESSING';
 	}
@@ -212,6 +213,7 @@ $stat['accepted'] = $msobj['mining']['shares']['accepted_share'];
 $stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
 
 //ether stats
+date_default_timezone_set('UTC');
 $tomorrow = strtotime('tomorrow');
 $now = strtotime('now');
 $stat['todayEstimated'] = ($stat['todayUnpaid'] / (86400 - ($tomorrow - $now))) * 86400;
