@@ -213,6 +213,7 @@ $stat['accepted'] = $msobj['mining']['shares']['accepted_share'];
 $stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
 
 //ether stats
+$stat['now'] = date("H:i:s", time());
 date_default_timezone_set('UTC');
 $tomorrow = strtotime('tomorrow');
 $now = strtotime('now');
@@ -243,6 +244,5 @@ if (strtotime($stat['paytime']) < $stat['lastpaidplussevendays']) {
 	$stat['eneeded'] = $stat['hoursuntil'] * $stat['ehour'];
 	$conf['payout_threshold'] = $stat['unpaid'] + $stat['eneeded'];
 }
-$stat['now'] = date("H:i:s", time());
 
 ?>
