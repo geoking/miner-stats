@@ -40,14 +40,16 @@ function core_calc_remaining($fin) {
 		return 'PROCESSING';
 	}
 
+	$months = (gmdate('n', floor($fin * 3600)))-1;
 	$days = (gmdate('j', floor($fin * 3600)))-1;
 	$hours = gmdate('G', floor($fin * 3600));
 	if ($days == 0) { $minutes = gmdate('i', floor($fin * 3600)); }
 	// $seconds = gmdate('s', floor($fin * 3600));
 	
 	$output = '';
-	if ( $days != '0' ) { if ( $days != '1' ) { $p = ' days'; } else { $p = ' day'; } $output = $output.$days.$p; }
-	if ( $hours != '0' ) { if ( $hours != '1' ) { $p = ' hrs'; } else { $p = ' hr'; } $output = $output.' '.$hours.$p; }
+	if ( $months != '0' ) { if ( $months != '1' ) { $p = ' months'; } else { $p = ' month'; } $output = $output.$months.$p; }
+	if ( $days != '0' ) { if ( $days != '1' ) { $p = ' days'; } else { $p = ' day'; } $output = $output.' '.$days.$p; }
+	if ($months == 0) { if ( $hours != '0' ) { if ( $hours != '1' ) { $p = ' hrs'; } else { $p = ' hr'; } $output = $output.' '.$hours.$p; } }
 	if ($days == 0) { if ( $minutes != '0' ) { if ( $minutes != '1' ) { $p = ' mins'; } else { $p = ' min'; } $output = $output.' '.$minutes.$p; } }
 	// if ( $seconds != '0' ) { $output = $output.', '.$seconds.' secs'; }
 
