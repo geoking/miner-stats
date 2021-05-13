@@ -125,3 +125,4 @@ web/multipool/inc/config.php
 web/multipool/inc/cron.php
 web/multipool/tmp
 web/ethermine/inc/cron.php
+web/ethermine/siri.php
