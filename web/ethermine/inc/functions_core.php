@@ -17,7 +17,7 @@ function core_getkey() {
 
 function core_getcryptourl($crypto, $fiat) {
 	include('config.php');
-	$url = 'https://uk.finance.yahoo.com/quote/'.$crypto.'-'.$fiat;
+	$url = 'https://uk.finance.yahoo.com/chart/'.$crypto.'-'.$fiat;
 	return $url;
 }
 
@@ -179,26 +179,27 @@ $stat['unpaid'] = number_format((($obj['data']['unpaid']/10)/100000000000000000)
 $stat['currentStatsUnpaid'] = number_format((($currentStats['data']['unpaid']/10)/100000000000000000),5);
 $stat['currentStatsOldUnpaid'] = number_format((($currentStatsOld['data']['unpaid']/10)/100000000000000000),5);
 $stat['currentStatsOldOldUnpaid'] = number_format((($currentStatsOldOld['data']['unpaid']/10)/100000000000000000),5);
+$stat['lastpaidamount'] = number_format((($pobj['data'][0]['amount']/10)/100000000000000000),5);
 
 if (($stat['unpaid'] - $stat['currentStatsUnpaid']) > 0) {
 	$stat['todayUnpaid'] = $stat['unpaid'] - $stat['currentStatsUnpaid'];
 }
 else {
-	$stat['todayUnpaid'] = $stat['unpaid'];
+	$stat['todayUnpaid'] = $stat['unpaid'] + ($stat['lastpaidamount'] - $stat['currentStatsUnpaid']);
 }
 
 if (($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']) > 0) {
 	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'];
 }
 else {
-	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'];
+	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] + ($stat['lastpaidamount'] - $stat['currentStatsOldUnpaid']);
 }
 
 if (($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']) > 0) {
 	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'];
 }
 else {
-	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'];
+	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'] + ($stat['lastpaidamount'] - $stat['currentStatsOldOldUnpaid']);
 }
 
 //minerstat stats
