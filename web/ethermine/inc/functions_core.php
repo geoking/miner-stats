@@ -35,7 +35,6 @@ function core_dec($fin) {
 
 function core_calc_remaining($fin) {
 
-	date_default_timezone_set('UTC');
 	if ($fin < 0) {
 		return 'PROCESSING';
 	}
@@ -217,7 +216,6 @@ $stat['rejected'] = $msobj['mining']['shares']['rejected_share'];
 
 //ether stats
 $stat['now'] = date("H:i:s", time());
-date_default_timezone_set('UTC');
 $tomorrow = strtotime('tomorrow');
 $now = strtotime('now');
 $stat['todayEstimated'] = ($stat['todayUnpaid'] / (86400 - ($tomorrow - $now))) * 86400;
