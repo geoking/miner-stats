@@ -120,9 +120,9 @@ iOSInjectionProject/
 .DS_Store
 web/inc/config.php
 web/siri.php
-web/ethermine/inc/config.php
+web/hiveon/inc/config.php
 web/multipool/inc/config.php
 web/multipool/inc/cron.php
 web/multipool/tmp
-web/ethermine/inc/cron.php
-web/ethermine/siri.php
+web/hiveon/inc/cron.php
+web/hiveon/siri.php

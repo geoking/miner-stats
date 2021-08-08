@@ -70,7 +70,7 @@
 
 			<div class="col-md-4">
 				<ul class="list-group">
-					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://ethermine.org/miners/".$conf['wallet']."/dashboard"?> target="_blank">Earnings</a></h4></li>
+					<li class="list-group-item list-group-item-<?=$conf['colour']?>"><h4><a href=<?="https://hiveon.net/eth?miner=".$conf['wallet']?> target="_blank">Earnings</a></h4></li>
 					<li class="list-group-item">&Xi; Today (So Far) 	<span class="pull-right">&Xi;<?=number_format($stat['todayUnpaid'],4)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['todayUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; Yesterday		<span class="pull-right">&Xi;<?=number_format($stat['yesterdayUnpaid'],4)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['yesterdayUnpaid']),2)?>)</span></li>
 					<li class="list-group-item">&Xi; 2 Days Ago		<span class="pull-right">&Xi;<?=number_format($stat['twoDaysAgoUnpaid'],4)?> (<?=$fiat['sym'].number_format(($ethtogbp * $stat['twoDaysAgoUnpaid']),2)?>)</span></li>

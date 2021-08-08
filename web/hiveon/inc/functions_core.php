@@ -100,46 +100,24 @@ elseif ( strtoupper($conf['fiat']) == 'GBP' ) { $fiat = array( 'code' => 'GBP', 
 elseif ( strtoupper($conf['fiat']) == 'EUR' ) { $fiat = array( 'code' => 'EUR', 'sym' => '&euro;' ); }
 
 
-// get current stats from ethermine
+// get current stats from hive
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_TIMEOUT, 4);
-curl_setopt($ch, CURLOPT_URL, 'https://api.ethermine.org/miner/'.$conf['wallet'].'/currentStats');
+curl_setopt($ch, CURLOPT_URL, 'https://hiveon.net/api/v1/stats/miner/'.$conf['wallet'].'/ETH/billing-acc');
 $result = curl_exec($ch);
 curl_close($ch);
 $obj = json_decode($result, true);
 
 
-// creates a local cache file, in the event that the ethermine api limit is reached
+// creates a local cache file, in the event that the hive api limit is reached
 if ( is_null($obj) ) {
 	$cache = '1';
-	$result = file_get_contents($conf['em_cache_file']);
+	$result = file_get_contents($conf['hive_cache_file']);
 	$obj = json_decode($result, true);
 } else {
-	$cache = fopen($conf['em_cache_file'], 'w');
-	fwrite($cache, $result);
-	$cache = '0';
-}
-
-// get payout stats from ethermine
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_TIMEOUT, 4);
-curl_setopt($ch, CURLOPT_URL, 'https://api.ethermine.org/miner/'.$conf['wallet'].'/payouts');
-$result = curl_exec($ch);
-curl_close($ch);
-$pobj = json_decode($result, true);
-
-
-// creates a local cache file, in the event that the ethermine api limit is reached
-if ( is_null($pobj) ) {
-	$cache = '1';
-	$result = file_get_contents($conf['po_cache_file']);
-	$pobj = json_decode($result, true);
-} else {
-	$cache = fopen($conf['po_cache_file'], 'w');
+	$cache = fopen($conf['hive_cache_file'], 'w');
 	fwrite($cache, $result);
 	$cache = '0';
 }
@@ -174,31 +152,30 @@ $result = file_get_contents('tmp/currentStatsOld.tmp');
 $currentStatsOld = json_decode($result, true);
 $result = file_get_contents('tmp/currentStatsOldOld.tmp');
 $currentStatsOldOld = json_decode($result, true);
-$stat['unpaid'] = number_format((($obj['data']['unpaid']/10)/100000000000000000),5);
-$stat['currentStatsUnpaid'] = number_format((($currentStats['data']['unpaid']/10)/100000000000000000),5);
-$stat['currentStatsOldUnpaid'] = number_format((($currentStatsOld['data']['unpaid']/10)/100000000000000000),5);
-$stat['currentStatsOldOldUnpaid'] = number_format((($currentStatsOldOld['data']['unpaid']/10)/100000000000000000),5);
-$stat['lastpaidamount'] = number_format((($pobj['data'][0]['amount']/10)/100000000000000000),5);
+$stat['unpaid'] = $obj['totalUnpaid'];
+$stat['currentStatsUnpaid'] = $currentStats['totalUnpaid'];
+$stat['currentStatsOldUnpaid'] = $currentStatsOld['totalUnpaid'];
+$stat['currentStatsOldOldUnpaid'] = $currentStatsOldOld['totalUnpaid'];
 
 if (($stat['unpaid'] - $stat['currentStatsUnpaid']) > 0) {
 	$stat['todayUnpaid'] = $stat['unpaid'] - $stat['currentStatsUnpaid'];
 }
 else {
-	$stat['todayUnpaid'] = $stat['unpaid'] + ($stat['lastpaidamount'] - $stat['currentStatsUnpaid']);
+	$stat['todayUnpaid'] = $stat['unpaid'];
 }
 
 if (($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']) > 0) {
 	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'];
 }
 else {
-	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] + ($stat['lastpaidamount'] - $stat['currentStatsOldUnpaid']);
+	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'];
 }
 
 if (($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']) > 0) {
 	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'];
 }
 else {
-	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'] + ($stat['lastpaidamount'] - $stat['currentStatsOldOldUnpaid']);
+	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'];
 }
 
 //minerstat stats
