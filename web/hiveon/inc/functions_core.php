@@ -156,26 +156,27 @@ $stat['unpaid'] = $obj['totalUnpaid'];
 $stat['currentStatsUnpaid'] = $currentStats['totalUnpaid'];
 $stat['currentStatsOldUnpaid'] = $currentStatsOld['totalUnpaid'];
 $stat['currentStatsOldOldUnpaid'] = $currentStatsOldOld['totalUnpaid'];
+$stat['totalPaid'] = $obj['totalPaid'];
 
 if (($stat['unpaid'] - $stat['currentStatsUnpaid']) > 0) {
 	$stat['todayUnpaid'] = $stat['unpaid'] - $stat['currentStatsUnpaid'];
 }
 else {
-	$stat['todayUnpaid'] = $stat['unpaid'];
+	$stat['todayUnpaid'] = $stat['unpaid'] + (($stat['totalPaid'] - $currentStats['totalPaid']) - $stat['currentStatsUnpaid']);
 }
 
 if (($stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid']) > 0) {
 	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'] - $stat['currentStatsOldUnpaid'];
 }
 else {
-	$stat['yesterdayUnpaid'] = $stat['currentStatsUnpaid'];
+	$stat['todayUnpaid'] = $stat['unpaid'] + (($currentStats['totalPaid'] - $currentStatsOld['totalPaid']) - $stat['currentStatsUnpaid']);
 }
 
 if (($stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid']) > 0) {
 	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'] - $stat['currentStatsOldOldUnpaid'];
 }
 else {
-	$stat['twoDaysAgoUnpaid'] = $stat['currentStatsOldUnpaid'];
+	$stat['todayUnpaid'] = $stat['unpaid'] + (($currentStatsOld['totalPaid'] - $currentStatsOldOld['totalPaid']) - $stat['currentStatsUnpaid']);
 }
 
 //minerstat stats
